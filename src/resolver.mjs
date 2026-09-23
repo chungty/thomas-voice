@@ -1,5 +1,6 @@
 import { readFileSync } from 'node:fs';
 import Ajv2020 from 'ajv/dist/2020.js';
+import { authorizationPattern as AUTHORITY, identityPattern as IDENTITY } from './lint.mjs';
 
 const schema=JSON.parse(readFileSync(new URL('./schema.json',import.meta.url),'utf8'));
 const validateEnvelope=new Ajv2020({strict:true,allErrors:true,$data:true}).compile(schema);
@@ -16,8 +17,7 @@ export const PRESETS=Object.freeze({
   'agent-handoff':{intent:'update',medium:'written',delivery:'asynchronous',form:'message',platform:'none',relationship:'unknown',stakes:'moderate'},
   'neutral-public':{intent:'inform',medium:'written',delivery:'asynchronous',form:'message',platform:'none',relationship:'unknown',stakes:'moderate'}
 });
-const AUTHORITY=/\b(?:i|we|thomas)\s+(?:have\s+)?(?:approve|approved|authorize|authorized|consent|commit|committed)\b|\bon my behalf\b/i;
-const IDENTITY=/\b(?:i am|i['’]m|this is|speaking as|my name is)\s+thomas(?: chung)?\b|\bthomas here\b/i;
+
 const RESTRICTED=new Set(['experience','emotion','apology','commitment','approval']);
 const clone=value=>structuredClone(value);
 const words=text=>(typeof text==='string' && text.trim().match(/\S+/g)||[]).length;
@@ -45,6 +45,14 @@ function baseResponse() {
 
 function finalize(response) {
   response.validation.response_lint=semanticLint(response);
+  if (!response.validation.response_lint.passed && response.outcome === 'draft') {
+    response.outcome='needs_input';
+    response.draft='';
+    const failures=response.validation.response_lint.failures.map(({id})=>({id}));
+    response.validation.deterministic={passed:false,failures};
+    for (const {id} of failures) response.unresolved.push(unresolved(id,'safety-blocking','The proposed draft crossed an identity or authorization boundary.'));
+    response.validation.response_lint=semanticLint(response);
+  }
   return response;
 }
 function refuse(id,message) {
