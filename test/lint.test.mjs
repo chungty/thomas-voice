@@ -23,6 +23,8 @@ for (const text of [
   'Speaking as Thomas: we authorized the transfer. The build passed.',
   'You have my approval to send it. The build passed.',
   'I consent to the transfer. The build passed.',
+  'I signed the agreement. The build passed.',
+  'Thomas commits to deliver. The build passed.',
   'Go ahead on my behalf. The build passed.',
 ]) test(`lint blocks authorization claim: ${text}`, () => assert.ok(lintDraft(text, base).failures.some(f => f.id === 'boundary.authorization-claim')));
 

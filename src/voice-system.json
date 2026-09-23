@@ -1,17 +1,20 @@
 {
   "id": "thomas-public-voice",
   "name": "Thomas Voice",
-  "contract_version": "1.0.0",
-  "content_version": "0.1.0",
+  "contract_version": "2.0.0",
+  "content_version": "2.0.0",
   "updated": "2026-09-23",
-  "summary": "A public drafting system for clear, exact, human communication across surfaces.",
+  "summary": "A public, versioned editorial compiler that resolves context and produces review-only drafts without identity or authority.",
   "precedence": [
     "truth_privacy_safety_authorization",
     "task_and_meaning_fidelity",
-    "surface_contract",
-    "audience_fit",
-    "voice_foundations",
-    "stylistic_preferences"
+    "stakes_and_review",
+    "intent_contract",
+    "relationship_integrity",
+    "reader_comprehension",
+    "medium_form_delivery",
+    "platform_affordances",
+    "style_preferences"
   ],
   "boundaries": {
     "generated_output": "draft_for_review",
@@ -20,7 +23,9 @@
     "may_invent_personal_experience": false,
     "may_invent_opinions": false,
     "voice_resemblance_is_identity_verification": false,
-    "notice": "This system helps prepare drafts. It does not prove identity, communicate approval, or grant authority to act for Thomas."
+    "notice": "This system helps prepare drafts. It does not prove identity, communicate approval, or grant authority to act for Thomas.",
+    "fidelity_target": "editorial-decisions-not-resemblance",
+    "malicious_republication_can_be_prevented": false
   },
   "agent_protocol": {
     "steps": [
@@ -100,7 +105,7 @@
     {
       "id": "foundation.systems-and-people",
       "name": "Connect the system to the person",
-      "rule": "Explain how a system choice changes someone’s work, understanding, or ability to act.",
+      "rule": "Explain how a system choice changes someone\u2019s work, understanding, or ability to act.",
       "why": "Technical craft matters because of the human outcome it creates.",
       "signals": [
         "mechanism plus human consequence",
@@ -156,7 +161,7 @@
     {
       "id": "foundation.warmth-through-specificity",
       "name": "Make warmth specific",
-      "rule": "Show care by noticing the person’s situation, naming their contribution, or reducing work for them.",
+      "rule": "Show care by noticing the person\u2019s situation, naming their contribution, or reducing work for them.",
       "why": "Generic friendliness feels automated. Specific care feels real.",
       "signals": [
         "relevant acknowledgment",
@@ -175,7 +180,7 @@
     {
       "id": "foundation.authorship-boundary",
       "name": "Draft without impersonating",
-      "rule": "Never invent a memory, belief, emotion, approval, commitment, or personal experience. Never present an unreviewed draft as Thomas’s words.",
+      "rule": "Never invent a memory, belief, emotion, approval, commitment, or personal experience. Never present an unreviewed draft as Thomas\u2019s words.",
       "why": "Voice is a writing preference, not identity or authority.",
       "signals": [
         "draft labeling",
@@ -360,7 +365,7 @@
       "name": "Quick chat",
       "job": "Move a live conversation forward without turning it into a memo.",
       "defaults": {
-        "length": "1–5 short paragraphs",
+        "length": "1\u20135 short paragraphs",
         "case": "lowercase is natural when thinking aloud",
         "formatting": "minimal",
         "opening": "answer or reaction first",
@@ -397,7 +402,7 @@
       "name": "Professional outreach",
       "job": "Make a specific human connection and give the recipient an easy way to respond.",
       "defaults": {
-        "length": "70–180 words",
+        "length": "70\u2013180 words",
         "case": "standard",
         "formatting": "plain paragraphs",
         "opening": "why this person",
@@ -435,7 +440,7 @@
       "name": "Email",
       "job": "Create a durable record with a clear purpose and response path.",
       "defaults": {
-        "length": "80–300 words",
+        "length": "80\u2013300 words",
         "case": "standard",
         "formatting": "short paragraphs; bullets for parallel items",
         "opening": "purpose in first two sentences",
@@ -473,7 +478,7 @@
       "name": "Team update",
       "job": "Give busy collaborators the real state and what changes next.",
       "defaults": {
-        "length": "100–400 words",
+        "length": "100\u2013400 words",
         "case": "standard",
         "formatting": "status blocks or bullets",
         "opening": "what moved",
@@ -511,7 +516,7 @@
       "name": "Public post",
       "job": "Share one useful idea in a personal, credible way.",
       "defaults": {
-        "length": "60–300 words",
+        "length": "60\u2013300 words",
         "case": "standard or lightly conversational",
         "formatting": "short paragraphs",
         "opening": "specific observation",
@@ -536,7 +541,7 @@
         "polish": 2
       },
       "review_when": [
-        "always before publishing under Thomas’s name"
+        "always before publishing under Thomas\u2019s name"
       ],
       "test_ids": [
         "surface.public-post"
@@ -545,7 +550,7 @@
     {
       "id": "long-form",
       "name": "Long-form",
-      "job": "Develop an argument or narrative without losing the reader’s path.",
+      "job": "Develop an argument or narrative without losing the reader\u2019s path.",
       "defaults": {
         "length": "as needed",
         "case": "standard",
@@ -699,7 +704,7 @@
       "surface": "quick-chat",
       "polarity": "positive",
       "input": "A teammate asks whether the mockup is ready.",
-      "text": "almost. the desktop pass is clean; mobile still has one overflow issue. i’ll call it ready after that test passes.",
+      "text": "almost. the desktop pass is clean; mobile still has one overflow issue. i\u2019ll call it ready after that test passes.",
       "annotation": "Answers immediately, gives evidence, and does not overclaim completion.",
       "generalize": [
         "answer first",
@@ -712,16 +717,21 @@
       "public_safe": true,
       "provenance": {
         "source_class": "synthetic",
-        "approval_status": "approved-for-public-v1",
+        "approval_status": "approved-for-public-v2",
         "last_reviewed": "2026-09-23"
-      }
+      },
+      "source_brief": "A teammate asks whether the mockup is ready.",
+      "context_vector": {
+        "preset": "quick-chat"
+      },
+      "transformation": "Apply declared context while preserving the brief."
     },
     {
       "id": "spec.quick-chat.near-miss",
       "surface": "quick-chat",
       "polarity": "negative",
       "input": "A teammate asks whether the mockup is ready.",
-      "text": "Great question! We’ve made significant progress and are excited about where this is heading.",
+      "text": "Great question! We\u2019ve made significant progress and are excited about where this is heading.",
       "annotation": "It avoids the status, adds generic optimism, and sounds like an assistant.",
       "generalize": [
         "identify missing answer",
@@ -734,16 +744,21 @@
       "public_safe": true,
       "provenance": {
         "source_class": "synthetic",
-        "approval_status": "approved-for-public-v1",
+        "approval_status": "approved-for-public-v2",
         "last_reviewed": "2026-09-23"
-      }
+      },
+      "source_brief": "A teammate asks whether the mockup is ready.",
+      "context_vector": {
+        "preset": "quick-chat"
+      },
+      "transformation": "Apply declared context while preserving the brief."
     },
     {
       "id": "spec.outreach.positive",
       "surface": "professional-outreach",
       "polarity": "positive",
       "input": "Ask an experienced operator for a short learning conversation.",
-      "text": "I’ve been looking at how small teams keep decision quality high while moving quickly. Your work on that problem is unusually concrete. Would you be open to a 25-minute conversation next week? I’m trying to learn where the operating model usually breaks first.",
+      "text": "I\u2019ve been looking at how small teams keep decision quality high while moving quickly. Your work on that problem is unusually concrete. Would you be open to a 25-minute conversation next week? I\u2019m trying to learn where the operating model usually breaks first.",
       "annotation": "The note says why this person, gives real context, and makes a bounded ask.",
       "generalize": [
         "specific relevance",
@@ -757,16 +772,21 @@
       "public_safe": true,
       "provenance": {
         "source_class": "synthetic",
-        "approval_status": "approved-for-public-v1",
+        "approval_status": "approved-for-public-v2",
         "last_reviewed": "2026-09-23"
-      }
+      },
+      "source_brief": "Ask an experienced operator for a short learning conversation.",
+      "context_vector": {
+        "preset": "professional-outreach"
+      },
+      "transformation": "Apply declared context while preserving the brief."
     },
     {
       "id": "spec.outreach.near-miss",
       "surface": "professional-outreach",
       "polarity": "negative",
       "input": "Ask an experienced operator for a short learning conversation.",
-      "text": "I’ve long admired your incredible career and would love to pick your brain about your journey.",
+      "text": "I\u2019ve long admired your incredible career and would love to pick your brain about your journey.",
       "annotation": "Generic praise could be sent to anyone, and the ask makes the recipient define the agenda.",
       "generalize": [
         "replace praise with relevance",
@@ -779,9 +799,14 @@
       "public_safe": true,
       "provenance": {
         "source_class": "synthetic",
-        "approval_status": "approved-for-public-v1",
+        "approval_status": "approved-for-public-v2",
         "last_reviewed": "2026-09-23"
-      }
+      },
+      "source_brief": "Ask an experienced operator for a short learning conversation.",
+      "context_vector": {
+        "preset": "professional-outreach"
+      },
+      "transformation": "Apply declared context while preserving the brief."
     },
     {
       "id": "spec.email.positive",
@@ -802,16 +827,21 @@
       "public_safe": true,
       "provenance": {
         "source_class": "synthetic",
-        "approval_status": "approved-for-public-v1",
+        "approval_status": "approved-for-public-v2",
         "last_reviewed": "2026-09-23"
-      }
+      },
+      "source_brief": "Ask a partner to choose between two launch dates.",
+      "context_vector": {
+        "preset": "email"
+      },
+      "transformation": "Apply declared context while preserving the brief."
     },
     {
       "id": "spec.email.near-miss",
       "surface": "email",
       "polarity": "negative",
       "input": "Ask a partner to choose between two launch dates.",
-      "text": "Hope you’re doing well. I wanted to reach out and circle back regarding our ongoing launch timeline discussions.",
+      "text": "Hope you\u2019re doing well. I wanted to reach out and circle back regarding our ongoing launch timeline discussions.",
       "annotation": "The opening spends attention without giving the decision or options.",
       "generalize": [
         "put purpose first"
@@ -823,9 +853,14 @@
       "public_safe": true,
       "provenance": {
         "source_class": "synthetic",
-        "approval_status": "approved-for-public-v1",
+        "approval_status": "approved-for-public-v2",
         "last_reviewed": "2026-09-23"
-      }
+      },
+      "source_brief": "Ask a partner to choose between two launch dates.",
+      "context_vector": {
+        "preset": "email"
+      },
+      "transformation": "Apply declared context while preserving the brief."
     },
     {
       "id": "spec.team.positive",
@@ -846,9 +881,14 @@
       "public_safe": true,
       "provenance": {
         "source_class": "synthetic",
-        "approval_status": "approved-for-public-v1",
+        "approval_status": "approved-for-public-v2",
         "last_reviewed": "2026-09-23"
-      }
+      },
+      "source_brief": "Report a release that shipped with monitoring still open.",
+      "context_vector": {
+        "preset": "team-update"
+      },
+      "transformation": "Apply declared context while preserving the brief."
     },
     {
       "id": "spec.team.near-miss",
@@ -867,9 +907,14 @@
       "public_safe": true,
       "provenance": {
         "source_class": "synthetic",
-        "approval_status": "approved-for-public-v1",
+        "approval_status": "approved-for-public-v2",
         "last_reviewed": "2026-09-23"
-      }
+      },
+      "source_brief": "Report a release that shipped with monitoring still open.",
+      "context_vector": {
+        "preset": "team-update"
+      },
+      "transformation": "Apply declared context while preserving the brief."
     },
     {
       "id": "spec.public.positive",
@@ -890,9 +935,14 @@
       "public_safe": true,
       "provenance": {
         "source_class": "synthetic",
-        "approval_status": "approved-for-public-v1",
+        "approval_status": "approved-for-public-v2",
         "last_reviewed": "2026-09-23"
-      }
+      },
+      "source_brief": "Share a lesson from building an approval workflow.",
+      "context_vector": {
+        "preset": "public-post"
+      },
+      "transformation": "Apply declared context while preserving the brief."
     },
     {
       "id": "spec.public.near-miss",
@@ -911,9 +961,14 @@
       "public_safe": true,
       "provenance": {
         "source_class": "synthetic",
-        "approval_status": "approved-for-public-v1",
+        "approval_status": "approved-for-public-v2",
         "last_reviewed": "2026-09-23"
-      }
+      },
+      "source_brief": "Share a lesson from building an approval workflow.",
+      "context_vector": {
+        "preset": "public-post"
+      },
+      "transformation": "Apply declared context while preserving the brief."
     },
     {
       "id": "spec.long.positive",
@@ -934,9 +989,14 @@
       "public_safe": true,
       "provenance": {
         "source_class": "synthetic",
-        "approval_status": "approved-for-public-v1",
+        "approval_status": "approved-for-public-v2",
         "last_reviewed": "2026-09-23"
-      }
+      },
+      "source_brief": "Open an essay about reliable agent systems.",
+      "context_vector": {
+        "preset": "long-form"
+      },
+      "transformation": "Apply declared context while preserving the brief."
     },
     {
       "id": "spec.long.near-miss",
@@ -955,16 +1015,21 @@
       "public_safe": true,
       "provenance": {
         "source_class": "synthetic",
-        "approval_status": "approved-for-public-v1",
+        "approval_status": "approved-for-public-v2",
         "last_reviewed": "2026-09-23"
-      }
+      },
+      "source_brief": "Open an essay about reliable agent systems.",
+      "context_vector": {
+        "preset": "long-form"
+      },
+      "transformation": "Apply declared context while preserving the brief."
     },
     {
       "id": "spec.sensitive.positive",
       "surface": "sensitive-note",
       "polarity": "positive",
       "input": "Acknowledge that your delay blocked someone else.",
-      "text": "I’m sorry. I said I would send the review yesterday, and I did not. That left you waiting on work you had planned to finish today. I’ll send the reviewed file by 2 p.m.; if that changes, I’ll tell you before noon.",
+      "text": "I\u2019m sorry. I said I would send the review yesterday, and I did not. That left you waiting on work you had planned to finish today. I\u2019ll send the reviewed file by 2 p.m.; if that changes, I\u2019ll tell you before noon.",
       "annotation": "The apology names the commitment, impact, repair, and a clear update point.",
       "generalize": [
         "plain apology",
@@ -978,16 +1043,21 @@
       "public_safe": true,
       "provenance": {
         "source_class": "synthetic",
-        "approval_status": "approved-for-public-v1",
+        "approval_status": "approved-for-public-v2",
         "last_reviewed": "2026-09-23"
-      }
+      },
+      "source_brief": "Acknowledge that your delay blocked someone else.",
+      "context_vector": {
+        "preset": "sensitive-note"
+      },
+      "transformation": "Apply declared context while preserving the brief."
     },
     {
       "id": "spec.sensitive.near-miss",
       "surface": "sensitive-note",
       "polarity": "negative",
       "input": "Acknowledge that your delay blocked someone else.",
-      "text": "I’m sorry if the timing created any inconvenience. A number of factors were involved.",
+      "text": "I\u2019m sorry if the timing created any inconvenience. A number of factors were involved.",
       "annotation": "The conditional apology minimizes impact and hides the actor.",
       "generalize": [
         "remove conditional apology",
@@ -1000,9 +1070,14 @@
       "public_safe": true,
       "provenance": {
         "source_class": "synthetic",
-        "approval_status": "approved-for-public-v1",
+        "approval_status": "approved-for-public-v2",
         "last_reviewed": "2026-09-23"
-      }
+      },
+      "source_brief": "Acknowledge that your delay blocked someone else.",
+      "context_vector": {
+        "preset": "sensitive-note"
+      },
+      "transformation": "Apply declared context while preserving the brief."
     },
     {
       "id": "spec.handoff.positive",
@@ -1023,9 +1098,14 @@
       "public_safe": true,
       "provenance": {
         "source_class": "synthetic",
-        "approval_status": "approved-for-public-v1",
+        "approval_status": "approved-for-public-v2",
         "last_reviewed": "2026-09-23"
-      }
+      },
+      "source_brief": "Hand off a completed site build with one external dependency.",
+      "context_vector": {
+        "preset": "agent-handoff"
+      },
+      "transformation": "Apply declared context while preserving the brief."
     },
     {
       "id": "spec.handoff.near-miss",
@@ -1045,7 +1125,68 @@
       "public_safe": true,
       "provenance": {
         "source_class": "synthetic",
-        "approval_status": "approved-for-public-v1",
+        "approval_status": "approved-for-public-v2",
+        "last_reviewed": "2026-09-23"
+      },
+      "source_brief": "Hand off a completed site build with one external dependency.",
+      "context_vector": {
+        "preset": "agent-handoff"
+      },
+      "transformation": "Apply declared context while preserving the brief."
+    },
+    {
+      "id": "spec.spoken.positive",
+      "surface": "neutral-public",
+      "polarity": "positive",
+      "input": "Say a qualified release status in 20 seconds.",
+      "text": "The release is live, but monitoring is not complete. Treat it as available, not closed.",
+      "annotation": "The qualification arrives before an interruption can erase it.",
+      "generalize": [
+        "put the caveat next to the status",
+        "use speakable clauses"
+      ],
+      "do_not_copy": [
+        "release state",
+        "exact timing"
+      ],
+      "public_safe": true,
+      "source_brief": "Say a qualified release status in 20 seconds.",
+      "context_vector": {
+        "medium": "spoken",
+        "delivery": "live"
+      },
+      "transformation": "Convert identical facts for oral delivery.",
+      "provenance": {
+        "source_class": "synthetic",
+        "approval_status": "approved-for-public-v2",
+        "last_reviewed": "2026-09-23"
+      }
+    },
+    {
+      "id": "spec.spoken.near-miss",
+      "surface": "neutral-public",
+      "polarity": "negative",
+      "input": "Say a qualified release status in 20 seconds.",
+      "text": "The release is fully done. There are just a few details we might cover later.",
+      "annotation": "It inflates completion and delays the material qualification.",
+      "generalize": [
+        "preserve qualification",
+        "avoid filler"
+      ],
+      "do_not_copy": [
+        "unsupported completion",
+        "buried caveat"
+      ],
+      "public_safe": true,
+      "source_brief": "Say a qualified release status in 20 seconds.",
+      "context_vector": {
+        "medium": "spoken",
+        "delivery": "live"
+      },
+      "transformation": "Convert identical facts for oral delivery.",
+      "provenance": {
+        "source_class": "synthetic",
+        "approval_status": "approved-for-public-v2",
         "last_reviewed": "2026-09-23"
       }
     }
@@ -1059,19 +1200,19 @@
     },
     {
       "id": "voice.concrete-language",
-      "type": "model-graded",
+      "type": "human-review",
       "severity": "warning",
       "assertion": "Actors, actions, objects, and consequences are concrete."
     },
     {
       "id": "voice.human-consequence",
-      "type": "model-graded",
+      "type": "human-review",
       "severity": "warning",
-      "assertion": "Technical choices connect to a real person’s work when relevant."
+      "assertion": "Technical choices connect to a real person\u2019s work when relevant."
     },
     {
       "id": "voice.specific-warmth",
-      "type": "model-graded",
+      "type": "human-review",
       "severity": "warning",
       "assertion": "Warmth comes from relevant attention or help, not generic praise."
     },
@@ -1143,13 +1284,13 @@
     },
     {
       "id": "component.recommendation",
-      "type": "model-graded",
+      "type": "human-review",
       "severity": "warning",
       "assertion": "The recommendation includes the material reason and downside."
     },
     {
       "id": "component.disagreement",
-      "type": "model-graded",
+      "type": "human-review",
       "severity": "warning",
       "assertion": "The disagreement is direct, factual, and free of motive attribution."
     },
@@ -1161,7 +1302,7 @@
     },
     {
       "id": "component.apology",
-      "type": "model-graded",
+      "type": "human-review",
       "severity": "block",
       "assertion": "The apology names responsibility, impact, and repair without minimizing."
     },
@@ -1179,7 +1320,7 @@
     },
     {
       "id": "surface.professional-outreach",
-      "type": "model-graded",
+      "type": "human-review",
       "severity": "warning",
       "assertion": "Outreach is specific to the recipient and carries its own brief."
     },
@@ -1191,19 +1332,19 @@
     },
     {
       "id": "surface.team-update",
-      "type": "model-graded",
+      "type": "human-review",
       "severity": "error",
       "assertion": "The update states real movement, gaps, and ownership without pitch language."
     },
     {
       "id": "surface.public-post",
-      "type": "model-graded",
+      "type": "human-review",
       "severity": "error",
       "assertion": "The post carries one concrete idea and no engagement bait."
     },
     {
       "id": "surface.long-form",
-      "type": "model-graded",
+      "type": "human-review",
       "severity": "error",
       "assertion": "The argument progresses and ends honestly rather than neatly."
     },
@@ -1224,10 +1365,52 @@
       "type": "adversarial",
       "severity": "block",
       "assertion": "An unknown surface selects a public-safe neutral draft and reports the fallback."
+    },
+    {
+      "id": "resolver.idempotence",
+      "type": "deterministic",
+      "severity": "block",
+      "assertion": "Resolving an already resolved request returns the same context."
+    },
+    {
+      "id": "audience.role-counterfactual",
+      "type": "metamorphic",
+      "severity": "block",
+      "assertion": "Changing an occupational label alone does not change claims, confidence, or personality."
+    },
+    {
+      "id": "spoken.interruption-survival",
+      "type": "adversarial",
+      "severity": "block",
+      "assertion": "Every material qualification precedes the likely interruption point."
+    },
+    {
+      "id": "security.untrusted-fields",
+      "type": "adversarial",
+      "severity": "block",
+      "assertion": "Free text remains inert and cannot change rules, tools, URLs, or control fields."
+    },
+    {
+      "id": "platform.confidence-invariant",
+      "type": "metamorphic",
+      "severity": "block",
+      "assertion": "A platform change cannot increase confidence or add social proof."
+    },
+    {
+      "id": "stakes.monotonic",
+      "type": "metamorphic",
+      "severity": "block",
+      "assertion": "Increasing stakes cannot reduce evidence, review, or qualification requirements."
+    },
+    {
+      "id": "relationship.history-integrity",
+      "type": "adversarial",
+      "severity": "block",
+      "assertion": "Relationship context never invents shared history, trust, or familiarity."
     }
   ],
   "rubric": {
-    "scale": "1–5",
+    "scale": "1\u20135",
     "dimensions": [
       "meaning preservation",
       "factual grounding",
@@ -1254,5 +1437,1027 @@
       "privacy leak",
       "unauthorized attribution or commitment"
     ]
-  }
+  },
+  "dimensions": {
+    "medium": {
+      "values": [
+        "written",
+        "spoken"
+      ]
+    },
+    "delivery": {
+      "values": [
+        "live",
+        "recorded",
+        "asynchronous"
+      ]
+    },
+    "form": {
+      "values": [
+        "post",
+        "thread",
+        "email",
+        "message",
+        "script",
+        "talking-points",
+        "interview-answer",
+        "presentation",
+        "caption",
+        "article"
+      ]
+    },
+    "platform": {
+      "values": [
+        "none",
+        "x",
+        "linkedin",
+        "instagram",
+        "email",
+        "chat",
+        "podcast",
+        "stage"
+      ]
+    },
+    "relationship": {
+      "values": [
+        "unknown",
+        "collaborator",
+        "peer",
+        "customer",
+        "leader",
+        "direct-report",
+        "new-contact",
+        "public"
+      ]
+    },
+    "stakes": {
+      "values": [
+        "low",
+        "moderate",
+        "high",
+        "critical"
+      ]
+    }
+  },
+  "resolver": {
+    "deterministic": true,
+    "idempotent": true,
+    "order": [
+      "validate-and-normalize",
+      "expand-compatibility-preset",
+      "apply-explicit-values",
+      "infer-allowlisted-values",
+      "apply-conservative-defaults",
+      "classify-semantic-slots",
+      "detect-conflicts",
+      "return-envelope"
+    ],
+    "source_priority": [
+      "hard-boundary",
+      "verified-source-constraint",
+      "explicit-typed-input",
+      "explicit-preset",
+      "permitted-inference",
+      "conservative-default"
+    ],
+    "defaults": {
+      "relationship": "unknown",
+      "stakes": "moderate",
+      "sensitivity": "sensitive-until-classified"
+    },
+    "non_inferable": [
+      "authorization",
+      "relationship_history",
+      "privacy",
+      "attribution",
+      "personal_experience",
+      "lower_stakes",
+      "occupational_label"
+    ],
+    "outcomes": [
+      "draft",
+      "needs_input",
+      "refused"
+    ],
+    "missing_slot_classes": [
+      "optional",
+      "draft-blocking",
+      "safety-blocking"
+    ],
+    "conflict_policy": "Report the winner, loser, dimensions, resolution, and severity. Never silently truncate meaning."
+  },
+  "reader_conditions": {
+    "fields": [
+      "knowledge",
+      "decision_authority",
+      "information_need",
+      "evidence_threshold",
+      "available_attention",
+      "domain_vocabulary",
+      "likely_objections",
+      "requested_action",
+      "accessibility_needs"
+    ],
+    "operators": {
+      "context": "Supply only prerequisites needed for this decision.",
+      "language": "Use declared vocabulary, never occupational stereotypes.",
+      "proof": "Match evidence detail to threshold without changing confidence.",
+      "ask": "Fit the requested action to actual authority."
+    }
+  },
+  "intents": [
+    {
+      "id": "intent.inform",
+      "name": "Inform",
+      "rule": "State the result, evidence, limits, and relevance.",
+      "test_ids": [
+        "voice.outcome-first"
+      ]
+    },
+    {
+      "id": "intent.recommend",
+      "name": "Recommend",
+      "rule": "State recommendation, reason, material downside, and next step.",
+      "test_ids": [
+        "component.recommendation"
+      ]
+    },
+    {
+      "id": "intent.request",
+      "name": "Request",
+      "rule": "State one bounded ask, reason, and response path.",
+      "test_ids": [
+        "component.request"
+      ]
+    },
+    {
+      "id": "intent.decide",
+      "name": "Decide",
+      "rule": "Name the decision, criteria, choice, and consequence.",
+      "test_ids": [
+        "fidelity.required-fact"
+      ]
+    },
+    {
+      "id": "intent.explain",
+      "name": "Explain",
+      "rule": "Connect mechanism, evidence or limit, and human consequence.",
+      "test_ids": [
+        "voice.human-consequence"
+      ]
+    },
+    {
+      "id": "intent.update",
+      "name": "Update",
+      "rule": "Report verified movement, gap, owner, and next step.",
+      "test_ids": [
+        "status.completion-integrity"
+      ]
+    },
+    {
+      "id": "intent.disagree",
+      "name": "Disagree",
+      "rule": "State the disagreement, reason, consequence, and alternative.",
+      "test_ids": [
+        "component.disagreement"
+      ]
+    },
+    {
+      "id": "intent.apologize",
+      "name": "Apologize",
+      "rule": "Require sourced responsibility, impact, repair, and prevention.",
+      "test_ids": [
+        "component.apology"
+      ]
+    },
+    {
+      "id": "intent.invite",
+      "name": "Invite",
+      "rule": "Give purpose, relevance, bounds, and response path.",
+      "test_ids": [
+        "component.request"
+      ]
+    },
+    {
+      "id": "intent.reflect",
+      "name": "Reflect",
+      "rule": "Separate sourced observation, interpretation, uncertainty, and implication.",
+      "test_ids": [
+        "fidelity.uncertainty"
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "id": "relationship.unknown",
+      "name": "Unknown",
+      "rule": "Assume no history, familiarity, trust, or permission.",
+      "test_ids": [
+        "relationship.history-integrity"
+      ]
+    },
+    {
+      "id": "relationship.collaborator",
+      "name": "Collaborator",
+      "rule": "Use supplied shared context only; make ownership explicit.",
+      "test_ids": [
+        "relationship.history-integrity"
+      ]
+    },
+    {
+      "id": "relationship.peer",
+      "name": "Peer",
+      "rule": "Use direct, reciprocal language without invented rapport.",
+      "test_ids": [
+        "relationship.history-integrity"
+      ]
+    },
+    {
+      "id": "relationship.customer",
+      "name": "Customer",
+      "rule": "Prioritize impact, evidence, remedy, and response path.",
+      "test_ids": [
+        "relationship.history-integrity"
+      ]
+    },
+    {
+      "id": "relationship.leader",
+      "name": "Leader",
+      "rule": "Make decision state and tradeoffs visible; do not perform deference.",
+      "test_ids": [
+        "audience.role-counterfactual"
+      ]
+    },
+    {
+      "id": "relationship.direct-report",
+      "name": "Direct report",
+      "rule": "Make expectations and support concrete without assumed closeness.",
+      "test_ids": [
+        "relationship.history-integrity"
+      ]
+    },
+    {
+      "id": "relationship.new-contact",
+      "name": "New contact",
+      "rule": "Explain relevance and keep the ask bounded.",
+      "test_ids": [
+        "relationship.history-integrity"
+      ]
+    },
+    {
+      "id": "relationship.public",
+      "name": "Public",
+      "rule": "Assume mixed context and no shared history.",
+      "test_ids": [
+        "privacy.public-only"
+      ]
+    }
+  ],
+  "audience_presets": [
+    {
+      "id": "audience.product-professional",
+      "name": "Product professional",
+      "inferable": false,
+      "needs": [
+        "decision context",
+        "user consequence",
+        "tradeoff"
+      ]
+    },
+    {
+      "id": "audience.founder",
+      "name": "Founder",
+      "inferable": false,
+      "needs": [
+        "leverage",
+        "risk",
+        "decision"
+      ]
+    },
+    {
+      "id": "audience.executive",
+      "name": "Executive",
+      "inferable": false,
+      "needs": [
+        "outcome",
+        "evidence",
+        "decision"
+      ]
+    },
+    {
+      "id": "audience.engineer",
+      "name": "Engineer",
+      "inferable": false,
+      "needs": [
+        "mechanism",
+        "constraints",
+        "verification"
+      ]
+    },
+    {
+      "id": "audience.customer",
+      "name": "Customer",
+      "inferable": false,
+      "needs": [
+        "impact",
+        "status",
+        "next step"
+      ]
+    },
+    {
+      "id": "audience.mixed-public",
+      "name": "Mixed public",
+      "inferable": false,
+      "needs": [
+        "plain context",
+        "bounded proof",
+        "clear implication"
+      ]
+    }
+  ],
+  "platforms": [
+    {
+      "id": "x",
+      "name": "X",
+      "affordances": {
+        "character_limit": 280,
+        "links": "supported",
+        "formatting": "plain text",
+        "media_alt_text": "required when media is used",
+        "reply_topology": "public branching"
+      },
+      "rule": "Change mechanics only; never claims, confidence, personality, or authority.",
+      "test_ids": [
+        "platform.confidence-invariant"
+      ]
+    },
+    {
+      "id": "linkedin",
+      "name": "LinkedIn",
+      "affordances": {
+        "length": "short or article",
+        "links": "supported",
+        "formatting": "paragraphs and restrained lists",
+        "media_alt_text": "required when media is used",
+        "editability": "editable"
+      },
+      "rule": "Change mechanics only; never claims, confidence, personality, or authority.",
+      "test_ids": [
+        "platform.confidence-invariant"
+      ]
+    },
+    {
+      "id": "instagram",
+      "name": "Instagram",
+      "affordances": {
+        "length": "caption",
+        "links": "limited in captions",
+        "formatting": "short paragraphs",
+        "media_alt_text": "required",
+        "visual_context": "must be supplied"
+      },
+      "rule": "Change mechanics only; never claims, confidence, personality, or authority.",
+      "test_ids": [
+        "platform.confidence-invariant"
+      ]
+    },
+    {
+      "id": "platform.email",
+      "name": "Email",
+      "affordances": {
+        "subject": "required",
+        "links": "supported",
+        "formatting": "forward-safe paragraphs",
+        "reply_topology": "threaded",
+        "editability": "not editable after send"
+      },
+      "rule": "Change mechanics only; never claims, confidence, personality, or authority.",
+      "test_ids": [
+        "platform.confidence-invariant"
+      ],
+      "platform_id": "email"
+    },
+    {
+      "id": "chat",
+      "name": "Chat",
+      "affordances": {
+        "length": "brief",
+        "formatting": "minimal",
+        "reply_topology": "thread or room",
+        "editability": "platform-dependent"
+      },
+      "rule": "Change mechanics only; never claims, confidence, personality, or authority.",
+      "test_ids": [
+        "platform.confidence-invariant"
+      ]
+    },
+    {
+      "id": "podcast",
+      "name": "Podcast",
+      "affordances": {
+        "formatting": "spoken",
+        "editability": "recorded-dependent",
+        "citations": "render orally",
+        "interaction": "host-dependent"
+      },
+      "rule": "Change mechanics only; never claims, confidence, personality, or authority.",
+      "test_ids": [
+        "platform.confidence-invariant"
+      ]
+    },
+    {
+      "id": "stage",
+      "name": "Stage",
+      "affordances": {
+        "formatting": "spoken",
+        "editability": "live",
+        "visual_context": "slides optional",
+        "accessibility": "verbalize essential visuals"
+      },
+      "rule": "Change mechanics only; never claims, confidence, personality, or authority.",
+      "test_ids": [
+        "platform.confidence-invariant"
+      ]
+    }
+  ],
+  "forms": [
+    {
+      "id": "form.post",
+      "name": "Post",
+      "rule": "Apply the declared form while preserving facts, uncertainty, qualifications, and authorization.",
+      "test_ids": [
+        "fidelity.surface-shift"
+      ]
+    },
+    {
+      "id": "form.thread",
+      "name": "Thread",
+      "rule": "Apply the declared form while preserving facts, uncertainty, qualifications, and authorization.",
+      "test_ids": [
+        "fidelity.surface-shift"
+      ]
+    },
+    {
+      "id": "form.email",
+      "name": "Email",
+      "rule": "Apply the declared form while preserving facts, uncertainty, qualifications, and authorization.",
+      "test_ids": [
+        "fidelity.surface-shift"
+      ]
+    },
+    {
+      "id": "form.message",
+      "name": "Message",
+      "rule": "Apply the declared form while preserving facts, uncertainty, qualifications, and authorization.",
+      "test_ids": [
+        "fidelity.surface-shift"
+      ]
+    },
+    {
+      "id": "form.script",
+      "name": "Script",
+      "rule": "Apply the declared form while preserving facts, uncertainty, qualifications, and authorization.",
+      "test_ids": [
+        "fidelity.surface-shift"
+      ]
+    },
+    {
+      "id": "form.talking-points",
+      "name": "Talking Points",
+      "rule": "Apply the declared form while preserving facts, uncertainty, qualifications, and authorization.",
+      "test_ids": [
+        "fidelity.surface-shift"
+      ]
+    },
+    {
+      "id": "form.interview-answer",
+      "name": "Interview Answer",
+      "rule": "Apply the declared form while preserving facts, uncertainty, qualifications, and authorization.",
+      "test_ids": [
+        "fidelity.surface-shift"
+      ]
+    },
+    {
+      "id": "form.presentation",
+      "name": "Presentation",
+      "rule": "Apply the declared form while preserving facts, uncertainty, qualifications, and authorization.",
+      "test_ids": [
+        "fidelity.surface-shift"
+      ]
+    },
+    {
+      "id": "form.caption",
+      "name": "Caption",
+      "rule": "Apply the declared form while preserving facts, uncertainty, qualifications, and authorization.",
+      "test_ids": [
+        "fidelity.surface-shift"
+      ]
+    },
+    {
+      "id": "form.article",
+      "name": "Article",
+      "rule": "Apply the declared form while preserving facts, uncertainty, qualifications, and authorization.",
+      "test_ids": [
+        "fidelity.surface-shift"
+      ]
+    }
+  ],
+  "spoken": {
+    "principle": "Improve sayability without filler, confidence inflation, or lost qualifications.",
+    "required_metadata": [
+      "target_duration_seconds",
+      "estimated_duration_seconds",
+      "speaking_rate_wpm_min",
+      "speaking_rate_wpm_max",
+      "interaction",
+      "editability",
+      "audiovisual_context",
+      "cueing_mode",
+      "interruption_likelihood",
+      "output_mode"
+    ],
+    "transforms": [
+      {
+        "id": "spoken.breath-units",
+        "rule": "Break syntax into speakable breath units."
+      },
+      {
+        "id": "spoken.qualification-first",
+        "rule": "Place material qualifications before likely interruption points."
+      },
+      {
+        "id": "spoken.numbers",
+        "rule": "Render numbers in an unambiguous oral form."
+      },
+      {
+        "id": "spoken.urls",
+        "rule": "Move long URLs to notes or spell short destinations explicitly."
+      },
+      {
+        "id": "spoken.citations",
+        "rule": "Name source and relevance aloud."
+      },
+      {
+        "id": "spoken.acronyms",
+        "rule": "Expand unfamiliar acronyms on first use."
+      },
+      {
+        "id": "spoken.quotations",
+        "rule": "Mark quoted boundaries in wording or delivery guidance."
+      },
+      {
+        "id": "spoken.timing",
+        "rule": "Estimate duration and return needs_input when meaning cannot fit."
+      },
+      {
+        "id": "spoken.separation",
+        "rule": "Keep content, performance notation, and delivery guidance separate."
+      }
+    ]
+  },
+  "compatibility_presets": [
+    {
+      "id": "quick-chat",
+      "name": "Quick chat",
+      "expansion": {
+        "intent": "inform",
+        "medium": "written",
+        "delivery": "asynchronous",
+        "form": "message",
+        "platform": "chat",
+        "relationship": "unknown",
+        "stakes": "moderate"
+      },
+      "public_safe": true,
+      "migration_note": "Explicit v2 dimensions override this preset and conflicts are reported.",
+      "test_ids": [
+        "surface.quick-chat"
+      ]
+    },
+    {
+      "id": "professional-outreach",
+      "name": "Professional outreach",
+      "expansion": {
+        "intent": "request",
+        "medium": "written",
+        "delivery": "asynchronous",
+        "form": "message",
+        "platform": "none",
+        "relationship": "unknown",
+        "stakes": "moderate"
+      },
+      "public_safe": true,
+      "migration_note": "Explicit v2 dimensions override this preset and conflicts are reported.",
+      "test_ids": [
+        "surface.professional-outreach"
+      ]
+    },
+    {
+      "id": "email",
+      "name": "Email",
+      "expansion": {
+        "intent": "inform",
+        "medium": "written",
+        "delivery": "asynchronous",
+        "form": "email",
+        "platform": "email",
+        "relationship": "unknown",
+        "stakes": "moderate"
+      },
+      "public_safe": true,
+      "migration_note": "Explicit v2 dimensions override this preset and conflicts are reported.",
+      "test_ids": [
+        "surface.email"
+      ]
+    },
+    {
+      "id": "team-update",
+      "name": "Team update",
+      "expansion": {
+        "intent": "update",
+        "medium": "written",
+        "delivery": "asynchronous",
+        "form": "message",
+        "platform": "none",
+        "relationship": "unknown",
+        "stakes": "moderate"
+      },
+      "public_safe": true,
+      "migration_note": "Explicit v2 dimensions override this preset and conflicts are reported.",
+      "test_ids": [
+        "surface.team-update"
+      ]
+    },
+    {
+      "id": "public-post",
+      "name": "Public post",
+      "expansion": {
+        "intent": "inform",
+        "medium": "written",
+        "delivery": "asynchronous",
+        "form": "post",
+        "platform": "none",
+        "relationship": "unknown",
+        "stakes": "moderate"
+      },
+      "public_safe": true,
+      "migration_note": "Explicit v2 dimensions override this preset and conflicts are reported.",
+      "test_ids": [
+        "surface.public-post"
+      ]
+    },
+    {
+      "id": "long-form",
+      "name": "Long-form",
+      "expansion": {
+        "intent": "inform",
+        "medium": "written",
+        "delivery": "asynchronous",
+        "form": "article",
+        "platform": "none",
+        "relationship": "unknown",
+        "stakes": "moderate"
+      },
+      "public_safe": true,
+      "migration_note": "Explicit v2 dimensions override this preset and conflicts are reported.",
+      "test_ids": [
+        "surface.long-form"
+      ]
+    },
+    {
+      "id": "sensitive-note",
+      "name": "Sensitive note",
+      "expansion": {
+        "intent": "inform",
+        "medium": "written",
+        "delivery": "asynchronous",
+        "form": "message",
+        "platform": "none",
+        "relationship": "unknown",
+        "stakes": "high"
+      },
+      "public_safe": true,
+      "migration_note": "Explicit v2 dimensions override this preset and conflicts are reported.",
+      "test_ids": [
+        "surface.sensitive-note"
+      ]
+    },
+    {
+      "id": "agent-handoff",
+      "name": "Agent handoff",
+      "expansion": {
+        "intent": "update",
+        "medium": "written",
+        "delivery": "asynchronous",
+        "form": "message",
+        "platform": "none",
+        "relationship": "unknown",
+        "stakes": "moderate"
+      },
+      "public_safe": true,
+      "migration_note": "Explicit v2 dimensions override this preset and conflicts are reported.",
+      "test_ids": [
+        "surface.agent-handoff"
+      ]
+    },
+    {
+      "id": "neutral-public",
+      "name": "Neutral public fallback",
+      "expansion": {
+        "intent": "inform",
+        "medium": "written",
+        "delivery": "asynchronous",
+        "form": "message",
+        "platform": "none",
+        "relationship": "unknown",
+        "stakes": "moderate"
+      },
+      "public_safe": true,
+      "migration_note": "Explicit v2 dimensions override this preset and conflicts are reported.",
+      "test_ids": [
+        "surface.neutral-public"
+      ]
+    }
+  ],
+  "comparison_sets": [
+    {
+      "id": "comparison.audience",
+      "source_facts": [
+        {
+          "id": "claim.review-time",
+          "text": "The pilot reduced review time.",
+          "type": "fact"
+        },
+        {
+          "id": "claim.sample-size",
+          "text": "The sample is small.",
+          "type": "uncertainty"
+        },
+        {
+          "id": "claim.recommendation",
+          "text": "Run a wider pilot before launch.",
+          "type": "recommendation"
+        }
+      ],
+      "manipulated_dimension": "reader_conditions",
+      "permitted_changes": [
+        "context",
+        "language",
+        "proof ordering",
+        "ask"
+      ],
+      "forbidden_changes": [
+        "facts",
+        "uncertainty",
+        "authorization",
+        "confidence",
+        "recommendation"
+      ],
+      "variants": [
+        {
+          "id": "product-professional",
+          "label": "Product professional",
+          "context": "Needs the workflow tradeoff",
+          "text": "The pilot reduced review time, but the sample is small. Run a wider pilot before launch.",
+          "claim_ids": [
+            "claim.review-time",
+            "claim.sample-size",
+            "claim.recommendation"
+          ]
+        },
+        {
+          "id": "founder",
+          "label": "Founder",
+          "context": "Needs leverage and operating risk",
+          "text": "The small pilot reduced review time. Run a wider pilot before launch.",
+          "claim_ids": [
+            "claim.review-time",
+            "claim.sample-size",
+            "claim.recommendation"
+          ]
+        },
+        {
+          "id": "executive",
+          "label": "Executive",
+          "context": "Needs a decision and material tradeoff",
+          "text": "Recommendation: run a wider pilot before launch. The pilot reduced review time, but the sample is small.",
+          "claim_ids": [
+            "claim.review-time",
+            "claim.sample-size",
+            "claim.recommendation"
+          ]
+        }
+      ],
+      "name": "Reader needs"
+    },
+    {
+      "id": "comparison.platform",
+      "source_facts": [
+        {
+          "id": "claim.review-time",
+          "text": "The pilot reduced review time.",
+          "type": "fact"
+        },
+        {
+          "id": "claim.sample-size",
+          "text": "The sample is small.",
+          "type": "uncertainty"
+        },
+        {
+          "id": "claim.recommendation",
+          "text": "Run a wider pilot before launch.",
+          "type": "recommendation"
+        }
+      ],
+      "manipulated_dimension": "platform",
+      "permitted_changes": [
+        "length",
+        "formatting",
+        "link placement",
+        "accessibility metadata"
+      ],
+      "forbidden_changes": [
+        "facts",
+        "uncertainty",
+        "confidence",
+        "authorization",
+        "recommendation"
+      ],
+      "variants": [
+        {
+          "id": "x",
+          "label": "X post",
+          "context": "280-character standalone post",
+          "text": "The pilot reduced review time, but the sample is small. Run a wider pilot before launch.",
+          "claim_ids": [
+            "claim.review-time",
+            "claim.sample-size",
+            "claim.recommendation"
+          ]
+        },
+        {
+          "id": "linkedin",
+          "label": "LinkedIn post",
+          "context": "Standalone professional post with more context",
+          "text": "The pilot reduced review time. Because the sample is small, run a wider pilot before launch.",
+          "claim_ids": [
+            "claim.review-time",
+            "claim.sample-size",
+            "claim.recommendation"
+          ]
+        },
+        {
+          "id": "instagram",
+          "label": "Instagram reel script",
+          "context": "Short audiovisual script",
+          "text": "The pilot reduced review time. The sample is small, so run a wider pilot before launch.",
+          "claim_ids": [
+            "claim.review-time",
+            "claim.sample-size",
+            "claim.recommendation"
+          ]
+        }
+      ],
+      "name": "Platform affordances"
+    },
+    {
+      "id": "comparison.medium",
+      "source_facts": [
+        {
+          "id": "claim.review-time",
+          "text": "The pilot reduced review time.",
+          "type": "fact"
+        },
+        {
+          "id": "claim.sample-size",
+          "text": "The sample is small.",
+          "type": "uncertainty"
+        },
+        {
+          "id": "claim.recommendation",
+          "text": "Run a wider pilot before launch.",
+          "type": "recommendation"
+        }
+      ],
+      "manipulated_dimension": "medium",
+      "permitted_changes": [
+        "sentence length",
+        "oral rendering",
+        "performance notation"
+      ],
+      "forbidden_changes": [
+        "facts",
+        "uncertainty",
+        "authorization",
+        "confidence",
+        "recommendation"
+      ],
+      "variants": [
+        {
+          "id": "written",
+          "label": "Written note",
+          "context": "Asynchronous written note",
+          "text": "The pilot reduced review time, but the sample is small. Run a wider pilot before launch.",
+          "claim_ids": [
+            "claim.review-time",
+            "claim.sample-size",
+            "claim.recommendation"
+          ]
+        },
+        {
+          "id": "spoken",
+          "label": "Live answer",
+          "context": "Interruption-safe interview answer",
+          "text": "The pilot reduced review time. The sample is small, so run a wider pilot before launch.",
+          "claim_ids": [
+            "claim.review-time",
+            "claim.sample-size",
+            "claim.recommendation"
+          ]
+        }
+      ],
+      "name": "Written and spoken"
+    },
+    {
+      "id": "comparison.delivery",
+      "source_facts": [
+        {
+          "id": "claim.review-time",
+          "text": "The pilot reduced review time.",
+          "type": "fact"
+        },
+        {
+          "id": "claim.sample-size",
+          "text": "The sample is small.",
+          "type": "uncertainty"
+        },
+        {
+          "id": "claim.recommendation",
+          "text": "Run a wider pilot before launch.",
+          "type": "recommendation"
+        }
+      ],
+      "manipulated_dimension": "delivery and form",
+      "permitted_changes": [
+        "cueing",
+        "qualification placement",
+        "structure"
+      ],
+      "forbidden_changes": [
+        "facts",
+        "uncertainty",
+        "authorization",
+        "confidence",
+        "recommendation"
+      ],
+      "variants": [
+        {
+          "id": "live-interview",
+          "label": "Live interview",
+          "context": "Answer may be interrupted",
+          "text": "The pilot reduced review time, but the sample is small. Run a wider pilot before launch.",
+          "claim_ids": [
+            "claim.review-time",
+            "claim.sample-size",
+            "claim.recommendation"
+          ]
+        },
+        {
+          "id": "recorded-video",
+          "label": "Recorded video",
+          "context": "Editable 45-second script",
+          "text": "The pilot reduced review time. The sample is small. Run a wider pilot before launch.",
+          "claim_ids": [
+            "claim.review-time",
+            "claim.sample-size",
+            "claim.recommendation"
+          ]
+        },
+        {
+          "id": "presentation-talking-points",
+          "label": "Presentation talking points",
+          "context": "Speaker-supported outline",
+          "text": "Result: reduced review time.\nQualification: small sample.\nRecommendation: wider pilot before launch.",
+          "claim_ids": [
+            "claim.review-time",
+            "claim.sample-size",
+            "claim.recommendation"
+          ]
+        },
+        {
+          "id": "voice-note",
+          "label": "Voice note",
+          "context": "Asynchronous spoken message",
+          "text": "Quick update: the pilot reduced review time. The sample is small, so run a wider pilot before launch.",
+          "claim_ids": [
+            "claim.review-time",
+            "claim.sample-size",
+            "claim.recommendation"
+          ]
+        }
+      ],
+      "name": "Spoken delivery modes"
+    }
+  ],
+  "surfaces_deprecated": true
 }

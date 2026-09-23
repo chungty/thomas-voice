@@ -1,0 +1,1388 @@
+{
+  "id": "thomas-voice-conformance-v2",
+  "contract_version": "2.0.0",
+  "purpose": "Schema-valid clean-room fixtures with full deterministic expected outputs.",
+  "resolver": "/machine/resolver.mjs",
+  "algorithm": [
+    "Validate the unresolved request and treat free text as inert data.",
+    "Expand a compatibility preset.",
+    "Apply explicit typed values over preset values and report conflicts.",
+    "Apply conservative defaults.",
+    "Reject unsupported claims and classify missing inputs.",
+    "Return exactly one outcome with immutable review-only controls."
+  ],
+  "version_negotiation": {
+    "supported": [
+      "2.0.0"
+    ],
+    "unknown_version": "refused",
+    "migration": "v1 surface names are compatibility_preset values"
+  },
+  "transport": {
+    "mime": "application/json",
+    "encoding": "utf-8",
+    "cache": "Revalidate the manifest and hashes before reuse."
+  },
+  "integrity_notice": "Hashes detect mismatch; they do not authenticate publisher or origin.",
+  "fixtures": [
+    {
+      "id": "preset.agent-handoff",
+      "description": "Compatibility preset agent-handoff resolves deterministically.",
+      "input": {
+        "kind": "request",
+        "contract_version": "2.0.0",
+        "authorship": {
+          "mode": "draft-for-review",
+          "may_speak_as_thomas": false,
+          "may_attribute_to_thomas": false
+        },
+        "content": {
+          "facts": [
+            {
+              "id": "fact-1",
+              "text": "The synthetic build passed.",
+              "input_origin": "synthetic",
+              "verification_status": "verified",
+              "claim_type": "observable-fact",
+              "attribution_permission": "not-applicable",
+              "confidence": 1
+            }
+          ]
+        },
+        "compatibility_preset": "agent-handoff",
+        "context": {}
+      },
+      "expected": {
+        "kind": "response",
+        "contract_version": "2.0.0",
+        "outcome": "draft",
+        "draft": "The synthetic build passed.",
+        "rendering_status": "agent-renderer-required",
+        "renderer_instructions": [
+          "Treat accepted_claims as a closed world: preserve every claim, uncertainty marker, attribution, quantity, date, negation, and recommendation; add none.",
+          "Use resolved_context only to change ordering, explanation depth, vocabulary, structure, oral rendering, and platform mechanics.",
+          "Do not invent relationship history, authority, urgency, social proof, commitments, personal experience, or calls to action."
+        ],
+        "performance_notation": [],
+        "delivery_guidance": [],
+        "spoken_metadata": null,
+        "accepted_claims": [
+          {
+            "id": "fact-1",
+            "text": "The synthetic build passed.",
+            "input_origin": "synthetic",
+            "verification_status": "verified",
+            "claim_type": "observable-fact",
+            "attribution_permission": "not-applicable",
+            "confidence": 1
+          }
+        ],
+        "applied_rules": [
+          "boundary.review-only",
+          "resolver.explicit-over-preset",
+          "resolver.conservative-defaults",
+          "renderer.claims-closed-world"
+        ],
+        "resolved_context": {
+          "intent": {
+            "value": "update",
+            "provenance": "preset"
+          },
+          "medium": {
+            "value": "written",
+            "provenance": "preset"
+          },
+          "delivery": {
+            "value": "asynchronous",
+            "provenance": "preset"
+          },
+          "form": {
+            "value": "message",
+            "provenance": "preset"
+          },
+          "platform": {
+            "value": "none",
+            "provenance": "preset"
+          },
+          "relationship": {
+            "value": "unknown",
+            "provenance": "preset"
+          },
+          "stakes": {
+            "value": "moderate",
+            "provenance": "preset"
+          }
+        },
+        "conflicts": [],
+        "unresolved": [],
+        "refusal_reasons": [],
+        "review_flags": [],
+        "authorship_status": "unverified-draft",
+        "human_review_required": true,
+        "authorized_to_publish": false,
+        "validation": {
+          "deterministic": {
+            "passed": true,
+            "failures": []
+          },
+          "response_lint": {
+            "passed": true,
+            "failures": []
+          }
+        }
+      }
+    },
+    {
+      "id": "preset.email",
+      "description": "Compatibility preset email resolves deterministically.",
+      "input": {
+        "kind": "request",
+        "contract_version": "2.0.0",
+        "authorship": {
+          "mode": "draft-for-review",
+          "may_speak_as_thomas": false,
+          "may_attribute_to_thomas": false
+        },
+        "content": {
+          "facts": [
+            {
+              "id": "fact-1",
+              "text": "The synthetic build passed.",
+              "input_origin": "synthetic",
+              "verification_status": "verified",
+              "claim_type": "observable-fact",
+              "attribution_permission": "not-applicable",
+              "confidence": 1
+            }
+          ]
+        },
+        "compatibility_preset": "email",
+        "context": {}
+      },
+      "expected": {
+        "kind": "response",
+        "contract_version": "2.0.0",
+        "outcome": "draft",
+        "draft": "The synthetic build passed.",
+        "rendering_status": "agent-renderer-required",
+        "renderer_instructions": [
+          "Treat accepted_claims as a closed world: preserve every claim, uncertainty marker, attribution, quantity, date, negation, and recommendation; add none.",
+          "Use resolved_context only to change ordering, explanation depth, vocabulary, structure, oral rendering, and platform mechanics.",
+          "Do not invent relationship history, authority, urgency, social proof, commitments, personal experience, or calls to action."
+        ],
+        "performance_notation": [],
+        "delivery_guidance": [],
+        "spoken_metadata": null,
+        "accepted_claims": [
+          {
+            "id": "fact-1",
+            "text": "The synthetic build passed.",
+            "input_origin": "synthetic",
+            "verification_status": "verified",
+            "claim_type": "observable-fact",
+            "attribution_permission": "not-applicable",
+            "confidence": 1
+          }
+        ],
+        "applied_rules": [
+          "boundary.review-only",
+          "resolver.explicit-over-preset",
+          "resolver.conservative-defaults",
+          "renderer.claims-closed-world"
+        ],
+        "resolved_context": {
+          "intent": {
+            "value": "inform",
+            "provenance": "preset"
+          },
+          "medium": {
+            "value": "written",
+            "provenance": "preset"
+          },
+          "delivery": {
+            "value": "asynchronous",
+            "provenance": "preset"
+          },
+          "form": {
+            "value": "email",
+            "provenance": "preset"
+          },
+          "platform": {
+            "value": "email",
+            "provenance": "preset"
+          },
+          "relationship": {
+            "value": "unknown",
+            "provenance": "preset"
+          },
+          "stakes": {
+            "value": "moderate",
+            "provenance": "preset"
+          }
+        },
+        "conflicts": [],
+        "unresolved": [],
+        "refusal_reasons": [],
+        "review_flags": [],
+        "authorship_status": "unverified-draft",
+        "human_review_required": true,
+        "authorized_to_publish": false,
+        "validation": {
+          "deterministic": {
+            "passed": true,
+            "failures": []
+          },
+          "response_lint": {
+            "passed": true,
+            "failures": []
+          }
+        }
+      }
+    },
+    {
+      "id": "preset.long-form",
+      "description": "Compatibility preset long-form resolves deterministically.",
+      "input": {
+        "kind": "request",
+        "contract_version": "2.0.0",
+        "authorship": {
+          "mode": "draft-for-review",
+          "may_speak_as_thomas": false,
+          "may_attribute_to_thomas": false
+        },
+        "content": {
+          "facts": [
+            {
+              "id": "fact-1",
+              "text": "The synthetic build passed.",
+              "input_origin": "synthetic",
+              "verification_status": "verified",
+              "claim_type": "observable-fact",
+              "attribution_permission": "not-applicable",
+              "confidence": 1
+            }
+          ]
+        },
+        "compatibility_preset": "long-form",
+        "context": {}
+      },
+      "expected": {
+        "kind": "response",
+        "contract_version": "2.0.0",
+        "outcome": "draft",
+        "draft": "The synthetic build passed.",
+        "rendering_status": "agent-renderer-required",
+        "renderer_instructions": [
+          "Treat accepted_claims as a closed world: preserve every claim, uncertainty marker, attribution, quantity, date, negation, and recommendation; add none.",
+          "Use resolved_context only to change ordering, explanation depth, vocabulary, structure, oral rendering, and platform mechanics.",
+          "Do not invent relationship history, authority, urgency, social proof, commitments, personal experience, or calls to action."
+        ],
+        "performance_notation": [],
+        "delivery_guidance": [],
+        "spoken_metadata": null,
+        "accepted_claims": [
+          {
+            "id": "fact-1",
+            "text": "The synthetic build passed.",
+            "input_origin": "synthetic",
+            "verification_status": "verified",
+            "claim_type": "observable-fact",
+            "attribution_permission": "not-applicable",
+            "confidence": 1
+          }
+        ],
+        "applied_rules": [
+          "boundary.review-only",
+          "resolver.explicit-over-preset",
+          "resolver.conservative-defaults",
+          "renderer.claims-closed-world"
+        ],
+        "resolved_context": {
+          "intent": {
+            "value": "inform",
+            "provenance": "preset"
+          },
+          "medium": {
+            "value": "written",
+            "provenance": "preset"
+          },
+          "delivery": {
+            "value": "asynchronous",
+            "provenance": "preset"
+          },
+          "form": {
+            "value": "article",
+            "provenance": "preset"
+          },
+          "platform": {
+            "value": "none",
+            "provenance": "preset"
+          },
+          "relationship": {
+            "value": "public",
+            "provenance": "preset"
+          },
+          "stakes": {
+            "value": "moderate",
+            "provenance": "preset"
+          }
+        },
+        "conflicts": [],
+        "unresolved": [],
+        "refusal_reasons": [],
+        "review_flags": [],
+        "authorship_status": "unverified-draft",
+        "human_review_required": true,
+        "authorized_to_publish": false,
+        "validation": {
+          "deterministic": {
+            "passed": true,
+            "failures": []
+          },
+          "response_lint": {
+            "passed": true,
+            "failures": []
+          }
+        }
+      }
+    },
+    {
+      "id": "preset.neutral-public",
+      "description": "Compatibility preset neutral-public resolves deterministically.",
+      "input": {
+        "kind": "request",
+        "contract_version": "2.0.0",
+        "authorship": {
+          "mode": "draft-for-review",
+          "may_speak_as_thomas": false,
+          "may_attribute_to_thomas": false
+        },
+        "content": {
+          "facts": [
+            {
+              "id": "fact-1",
+              "text": "The synthetic build passed.",
+              "input_origin": "synthetic",
+              "verification_status": "verified",
+              "claim_type": "observable-fact",
+              "attribution_permission": "not-applicable",
+              "confidence": 1
+            }
+          ]
+        },
+        "compatibility_preset": "neutral-public",
+        "context": {}
+      },
+      "expected": {
+        "kind": "response",
+        "contract_version": "2.0.0",
+        "outcome": "draft",
+        "draft": "The synthetic build passed.",
+        "rendering_status": "agent-renderer-required",
+        "renderer_instructions": [
+          "Treat accepted_claims as a closed world: preserve every claim, uncertainty marker, attribution, quantity, date, negation, and recommendation; add none.",
+          "Use resolved_context only to change ordering, explanation depth, vocabulary, structure, oral rendering, and platform mechanics.",
+          "Do not invent relationship history, authority, urgency, social proof, commitments, personal experience, or calls to action."
+        ],
+        "performance_notation": [],
+        "delivery_guidance": [],
+        "spoken_metadata": null,
+        "accepted_claims": [
+          {
+            "id": "fact-1",
+            "text": "The synthetic build passed.",
+            "input_origin": "synthetic",
+            "verification_status": "verified",
+            "claim_type": "observable-fact",
+            "attribution_permission": "not-applicable",
+            "confidence": 1
+          }
+        ],
+        "applied_rules": [
+          "boundary.review-only",
+          "resolver.explicit-over-preset",
+          "resolver.conservative-defaults",
+          "renderer.claims-closed-world"
+        ],
+        "resolved_context": {
+          "intent": {
+            "value": "inform",
+            "provenance": "preset"
+          },
+          "medium": {
+            "value": "written",
+            "provenance": "preset"
+          },
+          "delivery": {
+            "value": "asynchronous",
+            "provenance": "preset"
+          },
+          "form": {
+            "value": "message",
+            "provenance": "preset"
+          },
+          "platform": {
+            "value": "none",
+            "provenance": "preset"
+          },
+          "relationship": {
+            "value": "unknown",
+            "provenance": "preset"
+          },
+          "stakes": {
+            "value": "moderate",
+            "provenance": "preset"
+          }
+        },
+        "conflicts": [],
+        "unresolved": [],
+        "refusal_reasons": [],
+        "review_flags": [],
+        "authorship_status": "unverified-draft",
+        "human_review_required": true,
+        "authorized_to_publish": false,
+        "validation": {
+          "deterministic": {
+            "passed": true,
+            "failures": []
+          },
+          "response_lint": {
+            "passed": true,
+            "failures": []
+          }
+        }
+      }
+    },
+    {
+      "id": "preset.professional-outreach",
+      "description": "Compatibility preset professional-outreach resolves deterministically.",
+      "input": {
+        "kind": "request",
+        "contract_version": "2.0.0",
+        "authorship": {
+          "mode": "draft-for-review",
+          "may_speak_as_thomas": false,
+          "may_attribute_to_thomas": false
+        },
+        "content": {
+          "facts": [
+            {
+              "id": "fact-1",
+              "text": "The synthetic build passed.",
+              "input_origin": "synthetic",
+              "verification_status": "verified",
+              "claim_type": "observable-fact",
+              "attribution_permission": "not-applicable",
+              "confidence": 1
+            }
+          ]
+        },
+        "compatibility_preset": "professional-outreach",
+        "context": {}
+      },
+      "expected": {
+        "kind": "response",
+        "contract_version": "2.0.0",
+        "outcome": "draft",
+        "draft": "The synthetic build passed.",
+        "rendering_status": "agent-renderer-required",
+        "renderer_instructions": [
+          "Treat accepted_claims as a closed world: preserve every claim, uncertainty marker, attribution, quantity, date, negation, and recommendation; add none.",
+          "Use resolved_context only to change ordering, explanation depth, vocabulary, structure, oral rendering, and platform mechanics.",
+          "Do not invent relationship history, authority, urgency, social proof, commitments, personal experience, or calls to action."
+        ],
+        "performance_notation": [],
+        "delivery_guidance": [],
+        "spoken_metadata": null,
+        "accepted_claims": [
+          {
+            "id": "fact-1",
+            "text": "The synthetic build passed.",
+            "input_origin": "synthetic",
+            "verification_status": "verified",
+            "claim_type": "observable-fact",
+            "attribution_permission": "not-applicable",
+            "confidence": 1
+          }
+        ],
+        "applied_rules": [
+          "boundary.review-only",
+          "resolver.explicit-over-preset",
+          "resolver.conservative-defaults",
+          "renderer.claims-closed-world"
+        ],
+        "resolved_context": {
+          "intent": {
+            "value": "request",
+            "provenance": "preset"
+          },
+          "medium": {
+            "value": "written",
+            "provenance": "preset"
+          },
+          "delivery": {
+            "value": "asynchronous",
+            "provenance": "preset"
+          },
+          "form": {
+            "value": "message",
+            "provenance": "preset"
+          },
+          "platform": {
+            "value": "none",
+            "provenance": "preset"
+          },
+          "relationship": {
+            "value": "unknown",
+            "provenance": "preset"
+          },
+          "stakes": {
+            "value": "moderate",
+            "provenance": "preset"
+          }
+        },
+        "conflicts": [],
+        "unresolved": [],
+        "refusal_reasons": [],
+        "review_flags": [],
+        "authorship_status": "unverified-draft",
+        "human_review_required": true,
+        "authorized_to_publish": false,
+        "validation": {
+          "deterministic": {
+            "passed": true,
+            "failures": []
+          },
+          "response_lint": {
+            "passed": true,
+            "failures": []
+          }
+        }
+      }
+    },
+    {
+      "id": "preset.public-post",
+      "description": "Compatibility preset public-post resolves deterministically.",
+      "input": {
+        "kind": "request",
+        "contract_version": "2.0.0",
+        "authorship": {
+          "mode": "draft-for-review",
+          "may_speak_as_thomas": false,
+          "may_attribute_to_thomas": false
+        },
+        "content": {
+          "facts": [
+            {
+              "id": "fact-1",
+              "text": "The synthetic build passed.",
+              "input_origin": "synthetic",
+              "verification_status": "verified",
+              "claim_type": "observable-fact",
+              "attribution_permission": "not-applicable",
+              "confidence": 1
+            }
+          ]
+        },
+        "compatibility_preset": "public-post",
+        "context": {}
+      },
+      "expected": {
+        "kind": "response",
+        "contract_version": "2.0.0",
+        "outcome": "draft",
+        "draft": "The synthetic build passed.",
+        "rendering_status": "agent-renderer-required",
+        "renderer_instructions": [
+          "Treat accepted_claims as a closed world: preserve every claim, uncertainty marker, attribution, quantity, date, negation, and recommendation; add none.",
+          "Use resolved_context only to change ordering, explanation depth, vocabulary, structure, oral rendering, and platform mechanics.",
+          "Do not invent relationship history, authority, urgency, social proof, commitments, personal experience, or calls to action."
+        ],
+        "performance_notation": [],
+        "delivery_guidance": [],
+        "spoken_metadata": null,
+        "accepted_claims": [
+          {
+            "id": "fact-1",
+            "text": "The synthetic build passed.",
+            "input_origin": "synthetic",
+            "verification_status": "verified",
+            "claim_type": "observable-fact",
+            "attribution_permission": "not-applicable",
+            "confidence": 1
+          }
+        ],
+        "applied_rules": [
+          "boundary.review-only",
+          "resolver.explicit-over-preset",
+          "resolver.conservative-defaults",
+          "renderer.claims-closed-world"
+        ],
+        "resolved_context": {
+          "intent": {
+            "value": "inform",
+            "provenance": "preset"
+          },
+          "medium": {
+            "value": "written",
+            "provenance": "preset"
+          },
+          "delivery": {
+            "value": "asynchronous",
+            "provenance": "preset"
+          },
+          "form": {
+            "value": "post",
+            "provenance": "preset"
+          },
+          "platform": {
+            "value": "none",
+            "provenance": "preset"
+          },
+          "relationship": {
+            "value": "public",
+            "provenance": "preset"
+          },
+          "stakes": {
+            "value": "moderate",
+            "provenance": "preset"
+          }
+        },
+        "conflicts": [],
+        "unresolved": [],
+        "refusal_reasons": [],
+        "review_flags": [],
+        "authorship_status": "unverified-draft",
+        "human_review_required": true,
+        "authorized_to_publish": false,
+        "validation": {
+          "deterministic": {
+            "passed": true,
+            "failures": []
+          },
+          "response_lint": {
+            "passed": true,
+            "failures": []
+          }
+        }
+      }
+    },
+    {
+      "id": "preset.quick-chat",
+      "description": "Compatibility preset quick-chat resolves deterministically.",
+      "input": {
+        "kind": "request",
+        "contract_version": "2.0.0",
+        "authorship": {
+          "mode": "draft-for-review",
+          "may_speak_as_thomas": false,
+          "may_attribute_to_thomas": false
+        },
+        "content": {
+          "facts": [
+            {
+              "id": "fact-1",
+              "text": "The synthetic build passed.",
+              "input_origin": "synthetic",
+              "verification_status": "verified",
+              "claim_type": "observable-fact",
+              "attribution_permission": "not-applicable",
+              "confidence": 1
+            }
+          ]
+        },
+        "compatibility_preset": "quick-chat",
+        "context": {}
+      },
+      "expected": {
+        "kind": "response",
+        "contract_version": "2.0.0",
+        "outcome": "draft",
+        "draft": "The synthetic build passed.",
+        "rendering_status": "agent-renderer-required",
+        "renderer_instructions": [
+          "Treat accepted_claims as a closed world: preserve every claim, uncertainty marker, attribution, quantity, date, negation, and recommendation; add none.",
+          "Use resolved_context only to change ordering, explanation depth, vocabulary, structure, oral rendering, and platform mechanics.",
+          "Do not invent relationship history, authority, urgency, social proof, commitments, personal experience, or calls to action."
+        ],
+        "performance_notation": [],
+        "delivery_guidance": [],
+        "spoken_metadata": null,
+        "accepted_claims": [
+          {
+            "id": "fact-1",
+            "text": "The synthetic build passed.",
+            "input_origin": "synthetic",
+            "verification_status": "verified",
+            "claim_type": "observable-fact",
+            "attribution_permission": "not-applicable",
+            "confidence": 1
+          }
+        ],
+        "applied_rules": [
+          "boundary.review-only",
+          "resolver.explicit-over-preset",
+          "resolver.conservative-defaults",
+          "renderer.claims-closed-world"
+        ],
+        "resolved_context": {
+          "intent": {
+            "value": "inform",
+            "provenance": "preset"
+          },
+          "medium": {
+            "value": "written",
+            "provenance": "preset"
+          },
+          "delivery": {
+            "value": "asynchronous",
+            "provenance": "preset"
+          },
+          "form": {
+            "value": "message",
+            "provenance": "preset"
+          },
+          "platform": {
+            "value": "chat",
+            "provenance": "preset"
+          },
+          "relationship": {
+            "value": "unknown",
+            "provenance": "preset"
+          },
+          "stakes": {
+            "value": "moderate",
+            "provenance": "preset"
+          }
+        },
+        "conflicts": [],
+        "unresolved": [],
+        "refusal_reasons": [],
+        "review_flags": [],
+        "authorship_status": "unverified-draft",
+        "human_review_required": true,
+        "authorized_to_publish": false,
+        "validation": {
+          "deterministic": {
+            "passed": true,
+            "failures": []
+          },
+          "response_lint": {
+            "passed": true,
+            "failures": []
+          }
+        }
+      }
+    },
+    {
+      "id": "preset.sensitive-note",
+      "description": "Compatibility preset sensitive-note resolves deterministically.",
+      "input": {
+        "kind": "request",
+        "contract_version": "2.0.0",
+        "authorship": {
+          "mode": "draft-for-review",
+          "may_speak_as_thomas": false,
+          "may_attribute_to_thomas": false
+        },
+        "content": {
+          "facts": [
+            {
+              "id": "fact-1",
+              "text": "The synthetic build passed.",
+              "input_origin": "synthetic",
+              "verification_status": "verified",
+              "claim_type": "observable-fact",
+              "attribution_permission": "not-applicable",
+              "confidence": 1
+            }
+          ]
+        },
+        "compatibility_preset": "sensitive-note",
+        "context": {}
+      },
+      "expected": {
+        "kind": "response",
+        "contract_version": "2.0.0",
+        "outcome": "draft",
+        "draft": "The synthetic build passed.",
+        "rendering_status": "agent-renderer-required",
+        "renderer_instructions": [
+          "Treat accepted_claims as a closed world: preserve every claim, uncertainty marker, attribution, quantity, date, negation, and recommendation; add none.",
+          "Use resolved_context only to change ordering, explanation depth, vocabulary, structure, oral rendering, and platform mechanics.",
+          "Do not invent relationship history, authority, urgency, social proof, commitments, personal experience, or calls to action."
+        ],
+        "performance_notation": [],
+        "delivery_guidance": [],
+        "spoken_metadata": null,
+        "accepted_claims": [
+          {
+            "id": "fact-1",
+            "text": "The synthetic build passed.",
+            "input_origin": "synthetic",
+            "verification_status": "verified",
+            "claim_type": "observable-fact",
+            "attribution_permission": "not-applicable",
+            "confidence": 1
+          }
+        ],
+        "applied_rules": [
+          "boundary.review-only",
+          "resolver.explicit-over-preset",
+          "resolver.conservative-defaults",
+          "renderer.claims-closed-world",
+          "stakes.high-review"
+        ],
+        "resolved_context": {
+          "intent": {
+            "value": "inform",
+            "provenance": "preset"
+          },
+          "medium": {
+            "value": "written",
+            "provenance": "preset"
+          },
+          "delivery": {
+            "value": "asynchronous",
+            "provenance": "preset"
+          },
+          "form": {
+            "value": "message",
+            "provenance": "preset"
+          },
+          "platform": {
+            "value": "none",
+            "provenance": "preset"
+          },
+          "relationship": {
+            "value": "unknown",
+            "provenance": "preset"
+          },
+          "stakes": {
+            "value": "high",
+            "provenance": "preset"
+          }
+        },
+        "conflicts": [],
+        "unresolved": [],
+        "refusal_reasons": [],
+        "review_flags": [
+          "high-stakes-human-review"
+        ],
+        "authorship_status": "unverified-draft",
+        "human_review_required": true,
+        "authorized_to_publish": false,
+        "validation": {
+          "deterministic": {
+            "passed": true,
+            "failures": []
+          },
+          "response_lint": {
+            "passed": true,
+            "failures": []
+          }
+        }
+      }
+    },
+    {
+      "id": "preset.team-update",
+      "description": "Compatibility preset team-update resolves deterministically.",
+      "input": {
+        "kind": "request",
+        "contract_version": "2.0.0",
+        "authorship": {
+          "mode": "draft-for-review",
+          "may_speak_as_thomas": false,
+          "may_attribute_to_thomas": false
+        },
+        "content": {
+          "facts": [
+            {
+              "id": "fact-1",
+              "text": "The synthetic build passed.",
+              "input_origin": "synthetic",
+              "verification_status": "verified",
+              "claim_type": "observable-fact",
+              "attribution_permission": "not-applicable",
+              "confidence": 1
+            }
+          ]
+        },
+        "compatibility_preset": "team-update",
+        "context": {}
+      },
+      "expected": {
+        "kind": "response",
+        "contract_version": "2.0.0",
+        "outcome": "draft",
+        "draft": "The synthetic build passed.",
+        "rendering_status": "agent-renderer-required",
+        "renderer_instructions": [
+          "Treat accepted_claims as a closed world: preserve every claim, uncertainty marker, attribution, quantity, date, negation, and recommendation; add none.",
+          "Use resolved_context only to change ordering, explanation depth, vocabulary, structure, oral rendering, and platform mechanics.",
+          "Do not invent relationship history, authority, urgency, social proof, commitments, personal experience, or calls to action."
+        ],
+        "performance_notation": [],
+        "delivery_guidance": [],
+        "spoken_metadata": null,
+        "accepted_claims": [
+          {
+            "id": "fact-1",
+            "text": "The synthetic build passed.",
+            "input_origin": "synthetic",
+            "verification_status": "verified",
+            "claim_type": "observable-fact",
+            "attribution_permission": "not-applicable",
+            "confidence": 1
+          }
+        ],
+        "applied_rules": [
+          "boundary.review-only",
+          "resolver.explicit-over-preset",
+          "resolver.conservative-defaults",
+          "renderer.claims-closed-world"
+        ],
+        "resolved_context": {
+          "intent": {
+            "value": "update",
+            "provenance": "preset"
+          },
+          "medium": {
+            "value": "written",
+            "provenance": "preset"
+          },
+          "delivery": {
+            "value": "asynchronous",
+            "provenance": "preset"
+          },
+          "form": {
+            "value": "message",
+            "provenance": "preset"
+          },
+          "platform": {
+            "value": "none",
+            "provenance": "preset"
+          },
+          "relationship": {
+            "value": "unknown",
+            "provenance": "preset"
+          },
+          "stakes": {
+            "value": "moderate",
+            "provenance": "preset"
+          }
+        },
+        "conflicts": [],
+        "unresolved": [],
+        "refusal_reasons": [],
+        "review_flags": [],
+        "authorship_status": "unverified-draft",
+        "human_review_required": true,
+        "authorized_to_publish": false,
+        "validation": {
+          "deterministic": {
+            "passed": true,
+            "failures": []
+          },
+          "response_lint": {
+            "passed": true,
+            "failures": []
+          }
+        }
+      }
+    },
+    {
+      "id": "outcome.needs-input",
+      "description": "Impossible compression preserves meaning by returning needs_input.",
+      "input": {
+        "kind": "request",
+        "contract_version": "2.0.0",
+        "authorship": {
+          "mode": "draft-for-review",
+          "may_speak_as_thomas": false,
+          "may_attribute_to_thomas": false
+        },
+        "content": {
+          "facts": [
+            {
+              "id": "fact-1",
+              "text": "The release is live, but monitoring is incomplete.",
+              "input_origin": "synthetic",
+              "verification_status": "verified",
+              "claim_type": "observable-fact",
+              "attribution_permission": "not-applicable",
+              "confidence": 1
+            }
+          ]
+        },
+        "context": {
+          "intent": "inform",
+          "medium": "written",
+          "delivery": "asynchronous",
+          "form": "message",
+          "platform": "none",
+          "relationship": "unknown",
+          "stakes": "moderate"
+        },
+        "constraints": {
+          "max_words": 1
+        }
+      },
+      "expected": {
+        "kind": "response",
+        "contract_version": "2.0.0",
+        "outcome": "needs_input",
+        "draft": "",
+        "rendering_status": "agent-renderer-required",
+        "renderer_instructions": [
+          "Treat accepted_claims as a closed world: preserve every claim, uncertainty marker, attribution, quantity, date, negation, and recommendation; add none.",
+          "Use resolved_context only to change ordering, explanation depth, vocabulary, structure, oral rendering, and platform mechanics.",
+          "Do not invent relationship history, authority, urgency, social proof, commitments, personal experience, or calls to action."
+        ],
+        "performance_notation": [],
+        "delivery_guidance": [],
+        "spoken_metadata": null,
+        "accepted_claims": [
+          {
+            "id": "fact-1",
+            "text": "The release is live, but monitoring is incomplete.",
+            "input_origin": "synthetic",
+            "verification_status": "verified",
+            "claim_type": "observable-fact",
+            "attribution_permission": "not-applicable",
+            "confidence": 1
+          }
+        ],
+        "applied_rules": [
+          "boundary.review-only",
+          "resolver.explicit-over-preset",
+          "resolver.conservative-defaults",
+          "renderer.claims-closed-world"
+        ],
+        "resolved_context": {
+          "intent": {
+            "value": "inform",
+            "provenance": "user-specified"
+          },
+          "medium": {
+            "value": "written",
+            "provenance": "user-specified"
+          },
+          "delivery": {
+            "value": "asynchronous",
+            "provenance": "user-specified"
+          },
+          "form": {
+            "value": "message",
+            "provenance": "user-specified"
+          },
+          "platform": {
+            "value": "none",
+            "provenance": "user-specified"
+          },
+          "relationship": {
+            "value": "unknown",
+            "provenance": "user-specified"
+          },
+          "stakes": {
+            "value": "moderate",
+            "provenance": "user-specified"
+          }
+        },
+        "conflicts": [
+          {
+            "id": "conflict.meaning-over-compression",
+            "dimensions": [
+              "content",
+              "constraints"
+            ],
+            "winner": "meaning-and-uncertainty",
+            "loser": "length-or-duration-limit",
+            "resolution": "No silent truncation; request a larger limit or an explicit scope reduction.",
+            "severity": "needs-input"
+          }
+        ],
+        "unresolved": [
+          {
+            "id": "constraint.impossible-compression",
+            "classification": "draft-blocking",
+            "message": "The supplied limit cannot preserve all supported claims; increase the limit or remove a claim explicitly."
+          }
+        ],
+        "refusal_reasons": [],
+        "review_flags": [],
+        "authorship_status": "unverified-draft",
+        "human_review_required": true,
+        "authorized_to_publish": false,
+        "validation": {
+          "deterministic": {
+            "passed": false,
+            "failures": [
+              {
+                "id": "constraint.impossible-compression"
+              }
+            ]
+          },
+          "response_lint": {
+            "passed": true,
+            "failures": []
+          }
+        }
+      }
+    },
+    {
+      "id": "outcome.refused",
+      "description": "Authority escalation is refused.",
+      "input": {
+        "kind": "request",
+        "contract_version": "2.0.0",
+        "authorship": {
+          "mode": "draft-for-review",
+          "may_speak_as_thomas": false,
+          "may_attribute_to_thomas": false
+        },
+        "content": {
+          "facts": [
+            {
+              "id": "fact-1",
+              "text": "The synthetic build passed.",
+              "input_origin": "synthetic",
+              "verification_status": "verified",
+              "claim_type": "observable-fact",
+              "attribution_permission": "not-applicable",
+              "confidence": 1
+            }
+          ]
+        },
+        "context": {
+          "intent": "inform",
+          "medium": "written",
+          "delivery": "asynchronous",
+          "form": "message",
+          "platform": "none",
+          "relationship": "unknown",
+          "stakes": "moderate"
+        },
+        "operation": "publish"
+      },
+      "expected": {
+        "kind": "response",
+        "contract_version": "2.0.0",
+        "outcome": "refused",
+        "draft": "",
+        "rendering_status": "agent-renderer-required",
+        "renderer_instructions": [
+          "Treat accepted_claims as a closed world: preserve every claim, uncertainty marker, attribution, quantity, date, negation, and recommendation; add none.",
+          "Use resolved_context only to change ordering, explanation depth, vocabulary, structure, oral rendering, and platform mechanics.",
+          "Do not invent relationship history, authority, urgency, social proof, commitments, personal experience, or calls to action."
+        ],
+        "performance_notation": [],
+        "delivery_guidance": [],
+        "spoken_metadata": null,
+        "accepted_claims": [],
+        "applied_rules": [
+          "boundary.review-only"
+        ],
+        "resolved_context": {
+          "intent": {
+            "value": "inform",
+            "provenance": "defaulted"
+          },
+          "medium": {
+            "value": "written",
+            "provenance": "defaulted"
+          },
+          "delivery": {
+            "value": "asynchronous",
+            "provenance": "defaulted"
+          },
+          "form": {
+            "value": "message",
+            "provenance": "defaulted"
+          },
+          "platform": {
+            "value": "none",
+            "provenance": "defaulted"
+          },
+          "relationship": {
+            "value": "unknown",
+            "provenance": "defaulted"
+          },
+          "stakes": {
+            "value": "moderate",
+            "provenance": "defaulted"
+          }
+        },
+        "conflicts": [],
+        "unresolved": [],
+        "refusal_reasons": [
+          "Publishing and acting are outside the draft-only contract."
+        ],
+        "review_flags": [],
+        "authorship_status": "unverified-draft",
+        "human_review_required": true,
+        "authorized_to_publish": false,
+        "validation": {
+          "deterministic": {
+            "passed": false,
+            "failures": [
+              {
+                "id": "boundary.publish-request"
+              }
+            ]
+          },
+          "response_lint": {
+            "passed": true,
+            "failures": []
+          }
+        }
+      }
+    },
+    {
+      "id": "outcome.spoken-draft",
+      "description": "Spoken drafts include complete timing and delivery metadata.",
+      "input": {
+        "kind": "request",
+        "contract_version": "2.0.0",
+        "authorship": {
+          "mode": "draft-for-review",
+          "may_speak_as_thomas": false,
+          "may_attribute_to_thomas": false
+        },
+        "content": {
+          "facts": [
+            {
+              "id": "fact-1",
+              "text": "The synthetic build passed.",
+              "input_origin": "synthetic",
+              "verification_status": "verified",
+              "claim_type": "observable-fact",
+              "attribution_permission": "not-applicable",
+              "confidence": 1
+            }
+          ]
+        },
+        "context": {
+          "intent": "inform",
+          "medium": "spoken",
+          "delivery": "recorded",
+          "form": "talking-points",
+          "platform": "podcast",
+          "relationship": "unknown",
+          "stakes": "moderate"
+        },
+        "spoken": {
+          "target_duration_seconds": 30,
+          "speaking_rate_wpm_min": 110,
+          "speaking_rate_wpm_max": 150,
+          "interaction": "interview",
+          "editability": "editable",
+          "audiovisual_context": "audio-only",
+          "cueing_mode": "talking-points",
+          "interruption_likelihood": "high",
+          "output_mode": "talking-points"
+        }
+      },
+      "expected": {
+        "kind": "response",
+        "contract_version": "2.0.0",
+        "outcome": "draft",
+        "draft": "The synthetic build passed.",
+        "rendering_status": "agent-renderer-required",
+        "renderer_instructions": [
+          "Treat accepted_claims as a closed world: preserve every claim, uncertainty marker, attribution, quantity, date, negation, and recommendation; add none.",
+          "Use resolved_context only to change ordering, explanation depth, vocabulary, structure, oral rendering, and platform mechanics.",
+          "Do not invent relationship history, authority, urgency, social proof, commitments, personal experience, or calls to action."
+        ],
+        "performance_notation": [],
+        "delivery_guidance": [
+          "Place material qualifications before likely interruption points.",
+          "Read numbers, citations, acronyms, URLs, and quotations unambiguously."
+        ],
+        "spoken_metadata": {
+          "target_duration_seconds": 30,
+          "speaking_rate_wpm_min": 110,
+          "speaking_rate_wpm_max": 150,
+          "interaction": "interview",
+          "editability": "editable",
+          "audiovisual_context": "audio-only",
+          "cueing_mode": "talking-points",
+          "interruption_likelihood": "high",
+          "output_mode": "talking-points",
+          "estimated_duration_seconds": 2
+        },
+        "accepted_claims": [
+          {
+            "id": "fact-1",
+            "text": "The synthetic build passed.",
+            "input_origin": "synthetic",
+            "verification_status": "verified",
+            "claim_type": "observable-fact",
+            "attribution_permission": "not-applicable",
+            "confidence": 1
+          }
+        ],
+        "applied_rules": [
+          "boundary.review-only",
+          "resolver.explicit-over-preset",
+          "resolver.conservative-defaults",
+          "renderer.claims-closed-world",
+          "spoken.qualification-first",
+          "spoken.timing"
+        ],
+        "resolved_context": {
+          "intent": {
+            "value": "inform",
+            "provenance": "user-specified"
+          },
+          "medium": {
+            "value": "spoken",
+            "provenance": "user-specified"
+          },
+          "delivery": {
+            "value": "recorded",
+            "provenance": "user-specified"
+          },
+          "form": {
+            "value": "talking-points",
+            "provenance": "user-specified"
+          },
+          "platform": {
+            "value": "podcast",
+            "provenance": "user-specified"
+          },
+          "relationship": {
+            "value": "unknown",
+            "provenance": "user-specified"
+          },
+          "stakes": {
+            "value": "moderate",
+            "provenance": "user-specified"
+          }
+        },
+        "conflicts": [],
+        "unresolved": [],
+        "refusal_reasons": [],
+        "review_flags": [],
+        "authorship_status": "unverified-draft",
+        "human_review_required": true,
+        "authorized_to_publish": false,
+        "validation": {
+          "deterministic": {
+            "passed": true,
+            "failures": []
+          },
+          "response_lint": {
+            "passed": true,
+            "failures": []
+          }
+        }
+      }
+    }
+  ],
+  "invariants": {
+    "authorship_status": "unverified-draft",
+    "human_review_required": true,
+    "authorized_to_publish": false
+  }
+}

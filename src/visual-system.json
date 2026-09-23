@@ -1,0 +1,14 @@
+{
+  "id": "thomas-voice-visual-system",
+  "version": "2.0.0",
+  "source_family": "Thomas Chung portfolio",
+  "tokens": {
+    "color": {"primary":"oklch(0.141 0.005 285.823)","background":"oklch(0.985 0 0)","surface":"#FFFFFF","surface_muted":"oklch(0.967 0.001 286.375)","border":"oklch(0.92 0.004 286.32)","text_muted":"oklch(0.54 0.016 285.938)","teal":"oklch(0.753 0.1279 191.57)","teal_on_light":"oklch(0.50 0.10 191.57)"},
+    "type":{"display":"Lato, -apple-system, Roboto, sans-serif","body":"Inter, -apple-system, Roboto, sans-serif","metadata":"JetBrains Mono, ui-monospace, monospace"},
+    "radius":{"small":"4px","medium":"10px"},
+    "spacing":{"unit":"4px","page":"2.5rem","page_mobile":"1.5rem","section":"4rem","chapter":"5rem","opening":"8rem"},
+    "layout":{"page_max":"80rem","mobile_breakpoint":"640px","minimum_control_target":"44px"},
+    "focus":{"width":"2px","color":"teal_on_light","offset":"2px"}
+  },
+  "rules":["Use the light editorial canvas by default.","Reserve near-black surfaces for openings, source inspection, or the footer.","Use teal for functional links, focus, and semantic accents.","Prevent horizontal overflow at all viewport widths.","Core reading and machine resources require no client JavaScript."]
+}
