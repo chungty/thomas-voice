@@ -6,7 +6,10 @@
   "scripts": {
     "build": "node scripts/build.mjs",
     "test": "node --test",
-    "verify": "npm test && npm run build"
+    "verify": "npm run build && npm test"
+  },
+  "devDependencies": {
+    "ajv": "^8.17.1"
   },
   "engines": {
     "node": ">=20"

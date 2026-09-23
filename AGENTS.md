@@ -7,7 +7,7 @@ This repository publishes Thomas Chung's public voice system.
 - Treat voice as a versioned transformation system, not a persona prompt.
 - Preserve truth, uncertainty, privacy, and authorization ahead of style.
 - Public content must be synthetic or already public and explicitly reviewed.
-- Never publish private messages, operational details, behavioral fingerprints, authentication cues, or identifiable third-party material.
+- Publish broad drafting preferences, but never private habits, recurring phrases, relationship-specific behavior, sensitive operating patterns, authentication cues, or identifiable third-party material.
 - The system drafts for review. It never grants authority to speak, approve, commit, send, sign, or act for Thomas.
 
 ## Development

@@ -2,42 +2,100 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://voice.chungty.dev/machine/schema.json",
   "title": "Thomas Voice agent contract",
-  "request": {
-    "type": "object",
-    "required": ["surface", "intent", "audience", "authorship", "content"],
-    "properties": {
-      "surface": {"type": "string"},
-      "intent": {"type": "string"},
-      "audience": {"type": "object"},
-      "authorship": {
-        "type": "object",
-        "required": ["mode", "may_speak_as_thomas"],
-        "properties": {
-          "mode": {"const": "draft-for-review"},
-          "may_speak_as_thomas": {"const": false},
-          "may_attribute_to_thomas": {"const": false}
+  "oneOf": [
+    { "$ref": "#/$defs/request" },
+    { "$ref": "#/$defs/response" }
+  ],
+  "$defs": {
+    "fact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "text", "source", "confidence"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "text": { "type": "string", "minLength": 1 },
+        "source": { "enum": ["user-provided", "public-source", "verified-record"] },
+        "confidence": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
+    "request": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "surface", "intent", "audience", "authorship", "content"],
+      "properties": {
+        "kind": { "const": "request" },
+        "surface": { "enum": ["quick-chat", "professional-outreach", "email", "team-update", "public-post", "long-form", "sensitive-note", "agent-handoff", "neutral-public"] },
+        "intent": { "type": "string", "minLength": 1 },
+        "audience": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind"],
+          "properties": {
+            "kind": { "type": "string", "minLength": 1 },
+            "relationship": { "type": "string" },
+            "knowledge_level": { "enum": ["new", "familiar", "expert", "mixed"] }
+          }
+        },
+        "authorship": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["mode", "may_speak_as_thomas", "may_attribute_to_thomas"],
+          "properties": {
+            "mode": { "const": "draft-for-review" },
+            "may_speak_as_thomas": { "const": false },
+            "may_attribute_to_thomas": { "const": false }
+          }
+        },
+        "content": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["facts"],
+          "properties": {
+            "facts": { "type": "array", "items": { "$ref": "#/$defs/fact" } },
+            "required_points": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+            "prohibited_claims": { "type": "array", "items": { "type": "string", "minLength": 1 } }
+          }
+        },
+        "constraints": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "max_words": { "type": "integer", "minimum": 1 },
+            "sensitivity": { "enum": ["public", "internal", "sensitive"] },
+            "must_preserve_uncertainty": { "type": "boolean" }
+          }
         }
-      },
-      "content": {
-        "type": "object",
-        "required": ["facts"],
-        "properties": {
-          "facts": {"type": "array"},
-          "required_points": {"type": "array"},
-          "prohibited_claims": {"type": "array"}
+      }
+    },
+    "response": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "draft", "applied_rules", "unresolved", "review_flags", "authorized_to_publish", "validation"],
+      "properties": {
+        "kind": { "const": "response" },
+        "draft": { "type": "string" },
+        "applied_rules": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+        "unresolved": { "type": "array", "items": { "type": "string" } },
+        "review_flags": { "type": "array", "items": { "type": "string" } },
+        "authorized_to_publish": { "const": false },
+        "validation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["deterministic"],
+          "properties": {
+            "deterministic": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["passed", "failures"],
+              "properties": {
+                "passed": { "type": "boolean" },
+                "failures": { "type": "array", "items": { "type": "object" } }
+              }
+            },
+            "model_graded": { "enum": ["not-run", "passed", "failed"] }
+          }
         }
-      },
-      "constraints": {"type": "object"}
-    }
-  },
-  "response": {
-    "type": "object",
-    "required": ["draft", "applied_rules", "validation"],
-    "properties": {
-      "draft": {"type": "string"},
-      "applied_rules": {"type": "array", "items": {"type": "string"}},
-      "unresolved": {"type": "array"},
-      "validation": {"type": "object"}
+      }
     }
   }
 }

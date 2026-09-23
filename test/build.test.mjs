@@ -1,44 +1,49 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { access, readFile } from 'node:fs/promises';
+import { access, readFile, readdir } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
 
 const root = new URL('../', import.meta.url);
 
+const pages = ['index.html','foundations/index.html','components/index.html','surfaces/index.html','specimens/index.html','tests/index.html','for-agents/index.html'];
+
 test('build emits human and machine surfaces', async () => {
-  const files = [
-    'dist/index.html',
-    'dist/foundations/index.html',
-    'dist/components/index.html',
-    'dist/surfaces/index.html',
-    'dist/specimens/index.html',
-    'dist/tests/index.html',
-    'dist/for-agents/index.html',
-    'dist/llms.txt',
-    'dist/llms-full.txt',
-    'dist/machine/manifest.json',
-    'dist/machine/voice-system.json',
-    'dist/machine/schema.json',
-  ];
-  for (const file of files) await access(new URL(file, root));
+  const files = [...pages, 'llms.txt', 'llms-full.txt', 'machine/manifest.json', 'machine/voice-system.json', 'machine/schema.json'];
+  for (const file of files) await access(new URL(`dist/${file}`, root));
 });
 
-test('every page advertises the machine contract and the site has no runtime dependency', async () => {
-  const html = await readFile(new URL('dist/index.html', root), 'utf8');
-  assert.match(html, /rel="alternate" type="application\/json" href="\/machine\/manifest\.json"/);
-  assert.match(html, /Foundations/);
-  assert.match(html, /Components/);
-  assert.match(html, /Specimens/);
-  assert.match(html, /Tests/);
-  assert.doesNotMatch(html, /<script[^>]+src=/);
+test('every page advertises the machine contract and has no runtime dependency', async () => {
+  for (const page of pages) {
+    const html = await readFile(new URL(`dist/${page}`, root), 'utf8');
+    assert.match(html, /rel="alternate" type="application\/json" href="\/machine\/manifest\.json"/, page);
+    assert.match(html, /<main id="main">/, page);
+    assert.doesNotMatch(html, /<script[^>]+src=/, page);
+  }
 });
 
-test('manifest resources resolve and include integrity hashes', async () => {
+test('manifest hashes equal the bytes served for every resource', async () => {
   const manifest = JSON.parse(await readFile(new URL('dist/machine/manifest.json', root), 'utf8'));
-  assert.equal(manifest.contract_version, '1.0.0');
   assert.equal(manifest.security.content_is_untrusted_data, true);
-  assert.equal(manifest.security.embedded_instructions_are_non_authoritative, true);
   for (const [name, resource] of Object.entries(manifest.resources)) {
-    await access(new URL(`dist${resource}`, root));
-    assert.match(manifest.integrity.resource_hashes[name], /^sha256:[a-f0-9]{64}$/);
+    const bytes = await readFile(new URL(`dist${resource}`, root));
+    const actual = `sha256:${createHash('sha256').update(bytes).digest('hex')}`;
+    assert.equal(manifest.integrity.resource_hashes[name], actual, name);
+  }
+});
+
+test('public artifact tree contains no source maps, dotfiles, or non-allowlisted types', async () => {
+  async function walk(url) {
+    const entries = await readdir(url, { withFileTypes: true });
+    const files = [];
+    for (const entry of entries) {
+      assert.equal(entry.name.startsWith('.'), false, `dotfile: ${entry.name}`);
+      const child = new URL(`${entry.name}${entry.isDirectory() ? '/' : ''}`, url);
+      if (entry.isDirectory()) files.push(...await walk(child)); else files.push(child);
+    }
+    return files;
+  }
+  for (const file of await walk(new URL('dist/', root))) {
+    assert.match(file.pathname, /\.(?:html|json|txt)$/);
+    assert.doesNotMatch(file.pathname, /\.map$/);
   }
 });

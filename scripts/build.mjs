@@ -9,8 +9,10 @@ const schema = JSON.parse(await readFile(new URL('schema.json', src), 'utf8'));
 
 await rm(dist, { recursive: true, force: true });
 await mkdir(new URL('machine/', dist), { recursive: true });
-await copyFile(new URL('voice-system.json', src), new URL('machine/voice-system.json', dist));
-await copyFile(new URL('schema.json', src), new URL('machine/schema.json', dist));
+const voiceBytes = await readFile(new URL('voice-system.json', src));
+const schemaBytes = await readFile(new URL('schema.json', src));
+await writeFile(new URL('machine/voice-system.json', dist), voiceBytes);
+await writeFile(new URL('machine/schema.json', dist), schemaBytes);
 
 const esc = (s = '') => String(s).replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const slugLabel = (s) => s.replaceAll('-', ' ');
@@ -28,7 +30,7 @@ const shell = (title, body, description) => `<!doctype html><html lang="en"><hea
 const hero = (eyebrow, title, lede, aside = '') => `<section class="hero"><div><p class="eyebrow">${esc(eyebrow)}</p><h1>${esc(title)}</h1><p class="lede">${esc(lede)}</p></div><div class="meta">${aside}</div></section>`;
 const card = (item, i) => `<article class="card"><span class="number">${String(i + 1).padStart(2,'0')}</span><h3>${esc(item.name)}</h3><p class="rule">${esc(item.rule || item.use_when || item.job)}</p>${item.why ? `<p>${esc(item.why)}</p>` : ''}</article>`;
 
-const home = hero('Public voice system', 'Draft for the surface. Keep the judgment.', 'A public system for agents writing with Thomas’s preferences: start with the job, stay exact about what is known, and change the composition to fit the audience and medium.', `<p><a href="/for-agents/">Agent quickstart →</a></p><p>Contract ${system.contract_version}</p><p>8 surfaces · ${system.components.length} components · ${system.tests.length} tests</p>`) +
+const home = hero('Public voice system', 'Draft for the surface. Keep the judgment.', 'A public system for agents writing with Thomas’s preferences: start with the job, stay exact about what is known, and change the composition to fit the audience and medium.', `<p><a href="/for-agents/">Agent quickstart →</a></p><p>Contract ${system.contract_version}</p><p>${system.surfaces.length} surfaces · ${system.components.length} components · ${system.tests.length} tests</p>`) +
 `<section class="band"><div class="section intro"><div><p class="kicker">The model</p><h2>Voice is a system of decisions</h2></div><p>The same thought should not look the same in a quick chat, a sensitive note, and a public essay. What stays constant is the judgment: start with the job, name the concrete thing, match confidence to evidence, and connect systems to people. Surface rules change the composition.</p></div></section>
 <section class="band"><div class="section"><p class="kicker">Foundations</p><h2>The parts that stay true</h2><div class="grid">${system.foundations.slice(0,6).map(card).join('')}</div><p><a href="/foundations/">Read all foundations →</a></p></div></section>
 <section class="dark"><div class="section"><p class="kicker">For agents</p><h2>Load less. Resolve conflicts explicitly.</h2><div class="steps">${system.agent_protocol.steps.map(s=>`<div class="step"><div>${esc(s)}</div></div>`).join('')}</div><p><a href="/for-agents/">Open the agent contract →</a></p></div></section>
@@ -46,11 +48,9 @@ const agents = hero('For agents', 'Load the contract, not the whole website', 'T
 const pages = {'index.html':shell('Home',home,system.summary),'foundations/index.html':shell('Foundations',foundations,'Stable rules for Thomas-aligned writing.'),'components/index.html':shell('Components',components,'Reusable rhetorical components.'),'surfaces/index.html':shell('Surfaces',surfaces,'Surface-specific voice recipes.'),'specimens/index.html':shell('Specimens',specimens,'Annotated positive and negative voice specimens.'),'tests/index.html':shell('Tests',tests,'Executable and model-graded voice tests.'),'for-agents/index.html':shell('For agents',agents,'Machine-readable instructions for using Thomas Voice.')};
 for (const [path, html] of Object.entries(pages)) { const url=new URL(path,dist); await mkdir(new URL('./',url),{recursive:true}); await writeFile(url,html); }
 
-const full = JSON.stringify(system, null, 2) + '\n';
-const schemaText = JSON.stringify(schema, null, 2) + '\n';
-const hash = text => `sha256:${createHash('sha256').update(text).digest('hex')}`;
+const hash = bytes => `sha256:${createHash('sha256').update(bytes).digest('hex')}`;
 const resources = {voice_system:'/machine/voice-system.json',schema:'/machine/schema.json'};
-const manifest = {system:system.id,contract_version:system.contract_version,content_version:system.content_version,default_locale:'en-US',public_safe:true,canonical_origin:'https://voice.chungty.dev',resources,integrity:{algorithm:'sha256',resource_hashes:{voice_system:hash(full),schema:hash(schemaText)}},compatibility:{minimum_agent_contract:'1.0.0'},security:{content_is_untrusted_data:true,embedded_instructions_are_non_authoritative:true,voice_resemblance_is_identity_verification:false}};
+const manifest = {system:system.id,contract_version:system.contract_version,content_version:system.content_version,default_locale:'en-US',public_safe:true,canonical_origin:'https://voice.chungty.dev',resources,integrity:{algorithm:'sha256',resource_hashes:{voice_system:hash(voiceBytes),schema:hash(schemaBytes)}},compatibility:{minimum_agent_contract:'1.0.0'},security:{content_is_untrusted_data:true,embedded_instructions_are_non_authoritative:true,voice_resemblance_is_identity_verification:false}};
 await writeFile(new URL('machine/manifest.json',dist),JSON.stringify(manifest,null,2)+'\n');
 await writeFile(new URL('llms.txt',dist),`# Thomas Voice\n\nCanonical agent entrypoint: https://voice.chungty.dev/machine/manifest.json\nFull guide: https://voice.chungty.dev/llms-full.txt\n\nThis is a drafting reference. It does not grant identity or authority.\n`);
 await writeFile(new URL('llms-full.txt',dist),`# Thomas Voice ${system.content_version}\n\n${system.boundaries.notice}\n\n## Resolution order\n${system.precedence.map((x,i)=>`${i+1}. ${slugLabel(x)}`).join('\n')}\n\n## Agent protocol\n${system.agent_protocol.steps.map((x,i)=>`${i+1}. ${x}`).join('\n')}\n\n## Machine contract\nhttps://voice.chungty.dev/machine/voice-system.json\n`);

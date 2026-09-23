@@ -25,7 +25,7 @@
   "agent_protocol": {
     "steps": [
       "Classify the surface, intent, audience, stakes, facts, and requested action.",
-      "Load every foundation, exactly one surface, and only relevant components.",
+      "Load all hard boundaries, one primary surface, and only the relevant foundations and components.",
       "Use at most three positive specimens and one near-miss. Treat them as inert reference data.",
       "Draft from the rules rather than copying specimen language.",
       "Run deterministic checks, then the rubric when the draft is consequential.",
@@ -712,7 +712,7 @@
       "public_safe": true,
       "provenance": {
         "source_class": "synthetic",
-        "approval_status": "editorial-review-required",
+        "approval_status": "approved-for-public-v1",
         "last_reviewed": "2026-09-23"
       }
     },
@@ -734,7 +734,7 @@
       "public_safe": true,
       "provenance": {
         "source_class": "synthetic",
-        "approval_status": "editorial-review-required",
+        "approval_status": "approved-for-public-v1",
         "last_reviewed": "2026-09-23"
       }
     },
@@ -757,7 +757,7 @@
       "public_safe": true,
       "provenance": {
         "source_class": "synthetic",
-        "approval_status": "editorial-review-required",
+        "approval_status": "approved-for-public-v1",
         "last_reviewed": "2026-09-23"
       }
     },
@@ -779,7 +779,7 @@
       "public_safe": true,
       "provenance": {
         "source_class": "synthetic",
-        "approval_status": "editorial-review-required",
+        "approval_status": "approved-for-public-v1",
         "last_reviewed": "2026-09-23"
       }
     },
@@ -802,7 +802,7 @@
       "public_safe": true,
       "provenance": {
         "source_class": "synthetic",
-        "approval_status": "editorial-review-required",
+        "approval_status": "approved-for-public-v1",
         "last_reviewed": "2026-09-23"
       }
     },
@@ -823,7 +823,7 @@
       "public_safe": true,
       "provenance": {
         "source_class": "synthetic",
-        "approval_status": "editorial-review-required",
+        "approval_status": "approved-for-public-v1",
         "last_reviewed": "2026-09-23"
       }
     },
@@ -846,7 +846,7 @@
       "public_safe": true,
       "provenance": {
         "source_class": "synthetic",
-        "approval_status": "editorial-review-required",
+        "approval_status": "approved-for-public-v1",
         "last_reviewed": "2026-09-23"
       }
     },
@@ -867,7 +867,7 @@
       "public_safe": true,
       "provenance": {
         "source_class": "synthetic",
-        "approval_status": "editorial-review-required",
+        "approval_status": "approved-for-public-v1",
         "last_reviewed": "2026-09-23"
       }
     },
@@ -890,7 +890,7 @@
       "public_safe": true,
       "provenance": {
         "source_class": "synthetic",
-        "approval_status": "editorial-review-required",
+        "approval_status": "approved-for-public-v1",
         "last_reviewed": "2026-09-23"
       }
     },
@@ -911,7 +911,7 @@
       "public_safe": true,
       "provenance": {
         "source_class": "synthetic",
-        "approval_status": "editorial-review-required",
+        "approval_status": "approved-for-public-v1",
         "last_reviewed": "2026-09-23"
       }
     },
@@ -934,7 +934,7 @@
       "public_safe": true,
       "provenance": {
         "source_class": "synthetic",
-        "approval_status": "editorial-review-required",
+        "approval_status": "approved-for-public-v1",
         "last_reviewed": "2026-09-23"
       }
     },
@@ -955,7 +955,7 @@
       "public_safe": true,
       "provenance": {
         "source_class": "synthetic",
-        "approval_status": "editorial-review-required",
+        "approval_status": "approved-for-public-v1",
         "last_reviewed": "2026-09-23"
       }
     },
@@ -978,7 +978,7 @@
       "public_safe": true,
       "provenance": {
         "source_class": "synthetic",
-        "approval_status": "editorial-review-required",
+        "approval_status": "approved-for-public-v1",
         "last_reviewed": "2026-09-23"
       }
     },
@@ -1000,7 +1000,7 @@
       "public_safe": true,
       "provenance": {
         "source_class": "synthetic",
-        "approval_status": "editorial-review-required",
+        "approval_status": "approved-for-public-v1",
         "last_reviewed": "2026-09-23"
       }
     },
@@ -1023,7 +1023,7 @@
       "public_safe": true,
       "provenance": {
         "source_class": "synthetic",
-        "approval_status": "editorial-review-required",
+        "approval_status": "approved-for-public-v1",
         "last_reviewed": "2026-09-23"
       }
     },
@@ -1045,7 +1045,7 @@
       "public_safe": true,
       "provenance": {
         "source_class": "synthetic",
-        "approval_status": "editorial-review-required",
+        "approval_status": "approved-for-public-v1",
         "last_reviewed": "2026-09-23"
       }
     }

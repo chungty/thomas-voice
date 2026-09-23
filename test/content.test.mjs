@@ -47,7 +47,7 @@ test('every rule is test-linked and every specimen is annotated', async () => {
     assert.ok(specimen.do_not_copy?.length, `${specimen.id} needs do_not_copy rules`);
     assert.equal(specimen.public_safe, true);
     assert.equal(specimen.provenance.source_class, 'synthetic');
-    assert.equal(specimen.provenance.approval_status, 'editorial-review-required');
+    assert.equal(specimen.provenance.approval_status, 'approved-for-public-v1');
     assert.match(specimen.provenance.last_reviewed, /^\d{4}-\d{2}-\d{2}$/);
   }
 });
