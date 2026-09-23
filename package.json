@@ -1,0 +1,14 @@
+{
+  "name": "thomas-voice",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node --test",
+    "verify": "npm test && npm run build"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
