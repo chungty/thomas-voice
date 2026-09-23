@@ -10,6 +10,8 @@ for (const text of [
   'I’m Thomas. The build passed.',
   'This is Thomas. The build passed.',
   'Speaking as Thomas: the build passed.',
+  'Thomas here. The build passed.',
+  'My name is Thomas Chung. The build passed.',
 ]) test(`lint blocks identity claim: ${text}`, () => assert.ok(lintDraft(text, base).failures.some(f => f.id === 'boundary.identity-claim')));
 
 for (const text of [
@@ -19,6 +21,9 @@ for (const text of [
   'We approved the payment. The build passed.',
   'Thomas approves the payment. The build passed.',
   'Speaking as Thomas: we authorized the transfer. The build passed.',
+  'You have my approval to send it. The build passed.',
+  'I consent to the transfer. The build passed.',
+  'Go ahead on my behalf. The build passed.',
 ]) test(`lint blocks authorization claim: ${text}`, () => assert.ok(lintDraft(text, base).failures.some(f => f.id === 'boundary.authorization-claim')));
 
 test('lint rejects missing, empty, negated, and prohibited claims', () => {

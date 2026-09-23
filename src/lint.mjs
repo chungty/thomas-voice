@@ -1,5 +1,5 @@
-const identityPattern = /\b(?:i\s*(?:am|'m|’m)|this\s+is|speaking\s+as)\s+thomas(?:\s+chung)?\b|\bthomas would say\b/i;
-const authorizationPattern = /\b(?:i|we|thomas)\s+(?:(?:have|has)\s+)?(?:approve(?:d|s)?|authoriz(?:e|ed|es)|sign(?:ed|s)?|commit(?:ted|s)?)\b/i;
+const identityPattern = /\b(?:i\s*(?:am|'m|’m)|this\s+is|speaking\s+as|my\s+name\s+is)\s+thomas(?:\s+chung)?\b|\bthomas(?:\s+chung)?\s+here\b|\bthomas would say\b/i;
+const authorizationPattern = /\b(?:i|we|thomas)\s+(?:(?:have|has)\s+)?(?:approve(?:d|s)?|authoriz(?:e|ed|es)|sign(?:ed|s)?|commit(?:ted|s)?|consent(?:ed|s)?)\b|\byou have my approval\b|\bgo ahead on my behalf\b/i;
 const aiCadencePattern = /here(?:’|')s what you need to know|not just .{0,80}(?:,|;)\s*(?:it(?:’|')s|it is)|—|at its core|the real question|game[- ]changer/i;
 const chatbotPattern = /great question|i hope this helps|let me know if you(?:’|')d like|certainly!/i;
 
