@@ -1,101 +1,1695 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://voice.chungty.dev/machine/schema.json",
-  "title": "Thomas Voice agent contract",
+  "title": "Thomas Voice v2 request and response contract",
   "oneOf": [
-    { "$ref": "#/$defs/request" },
-    { "$ref": "#/$defs/response" }
+    {
+      "$ref": "#/$defs/request"
+    },
+    {
+      "$ref": "#/$defs/response"
+    }
   ],
   "$defs": {
-    "fact": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["id", "text", "source", "confidence"],
-      "properties": {
-        "id": { "type": "string", "minLength": 1 },
-        "text": { "type": "string", "minLength": 1 },
-        "source": { "enum": ["user-provided", "public-source", "verified-record"] },
-        "confidence": { "type": "number", "minimum": 0, "maximum": 1 }
-      }
-    },
     "request": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["kind", "surface", "intent", "audience", "authorship", "content"],
+      "required": [
+        "kind",
+        "contract_version",
+        "authorship",
+        "content"
+      ],
       "properties": {
-        "kind": { "const": "request" },
-        "surface": { "enum": ["quick-chat", "professional-outreach", "email", "team-update", "public-post", "long-form", "sensitive-note", "agent-handoff", "neutral-public"] },
-        "intent": { "type": "string", "minLength": 1 },
-        "audience": {
+        "kind": {
+          "const": "request"
+        },
+        "contract_version": {
+          "const": "2.0.0"
+        },
+        "operation": {
+          "enum": [
+            "draft",
+            "publish"
+          ]
+        },
+        "compatibility_preset": {
+          "enum": [
+            "agent-handoff",
+            "email",
+            "long-form",
+            "neutral-public",
+            "professional-outreach",
+            "public-post",
+            "quick-chat",
+            "sensitive-note",
+            "team-update"
+          ]
+        },
+        "context": {
           "type": "object",
           "additionalProperties": false,
-          "required": ["kind"],
+          "required": [],
           "properties": {
-            "kind": { "type": "string", "minLength": 1 },
-            "relationship": { "type": "string" },
-            "knowledge_level": { "enum": ["new", "familiar", "expert", "mixed"] }
+            "intent": {
+              "enum": [
+                "inform",
+                "recommend",
+                "request",
+                "decide",
+                "explain",
+                "update",
+                "disagree",
+                "apologize",
+                "invite",
+                "reflect"
+              ]
+            },
+            "medium": {
+              "enum": [
+                "written",
+                "spoken"
+              ]
+            },
+            "delivery": {
+              "enum": [
+                "live",
+                "recorded",
+                "asynchronous"
+              ]
+            },
+            "form": {
+              "enum": [
+                "post",
+                "thread",
+                "email",
+                "message",
+                "script",
+                "talking-points",
+                "interview-answer",
+                "presentation",
+                "caption",
+                "article"
+              ]
+            },
+            "platform": {
+              "enum": [
+                "none",
+                "x",
+                "linkedin",
+                "instagram",
+                "email",
+                "chat",
+                "podcast",
+                "stage"
+              ]
+            },
+            "relationship": {
+              "enum": [
+                "unknown",
+                "collaborator",
+                "peer",
+                "customer",
+                "leader",
+                "direct-report",
+                "new-contact",
+                "public"
+              ]
+            },
+            "stakes": {
+              "enum": [
+                "low",
+                "moderate",
+                "high",
+                "critical"
+              ]
+            }
+          }
+        },
+        "reader_conditions": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [],
+          "properties": {
+            "audience_preset": {
+              "enum": [
+                "product-professionals",
+                "founders",
+                "executives",
+                "engineers",
+                "customers",
+                "mixed-public"
+              ]
+            },
+            "knowledge": {
+              "enum": [
+                "new",
+                "familiar",
+                "expert",
+                "mixed"
+              ]
+            },
+            "decision_authority": {
+              "enum": [
+                "none",
+                "advisory",
+                "decision-maker",
+                "mixed"
+              ]
+            },
+            "information_need": {
+              "enum": [
+                "orient",
+                "evaluate",
+                "decide",
+                "act"
+              ]
+            },
+            "evidence_threshold": {
+              "enum": [
+                "summary",
+                "supported",
+                "audit-ready"
+              ]
+            },
+            "available_attention": {
+              "enum": [
+                "glance",
+                "brief",
+                "focused",
+                "extended"
+              ]
+            },
+            "domain_vocabulary": {
+              "enum": [
+                "plain",
+                "shared",
+                "specialist",
+                "mixed"
+              ]
+            },
+            "likely_objections": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "requested_action": {
+              "type": "string",
+              "minLength": 1
+            },
+            "accessibility_needs": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
           }
         },
         "authorship": {
           "type": "object",
           "additionalProperties": false,
-          "required": ["mode", "may_speak_as_thomas", "may_attribute_to_thomas"],
+          "required": [
+            "mode",
+            "may_speak_as_thomas",
+            "may_attribute_to_thomas"
+          ],
           "properties": {
-            "mode": { "const": "draft-for-review" },
-            "may_speak_as_thomas": { "const": false },
-            "may_attribute_to_thomas": { "const": false }
+            "mode": {
+              "const": "draft-for-review"
+            },
+            "may_speak_as_thomas": {
+              "const": false
+            },
+            "may_attribute_to_thomas": {
+              "const": false
+            }
           }
         },
         "content": {
           "type": "object",
           "additionalProperties": false,
-          "required": ["facts"],
+          "required": [
+            "facts"
+          ],
           "properties": {
-            "facts": { "type": "array", "items": { "$ref": "#/$defs/fact" } },
-            "required_points": { "type": "array", "items": { "type": "string", "minLength": 1 } },
-            "prohibited_claims": { "type": "array", "items": { "type": "string", "minLength": 1 } }
+            "facts": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/fact"
+              }
+            },
+            "required_points": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "prohibited_claims": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "brief": {
+              "type": "string"
+            }
           }
         },
         "constraints": {
           "type": "object",
           "additionalProperties": false,
+          "required": [],
           "properties": {
-            "max_words": { "type": "integer", "minimum": 1 },
-            "sensitivity": { "enum": ["public", "internal", "sensitive"] },
-            "must_preserve_uncertainty": { "type": "boolean" }
+            "max_words": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "sensitivity": {
+              "enum": [
+                "public",
+                "internal",
+                "sensitive"
+              ]
+            },
+            "must_preserve_uncertainty": {
+              "type": "boolean"
+            },
+            "locale": {
+              "type": "string",
+              "pattern": "^[a-z]{2}(?:-[A-Z]{2})?$"
+            }
+          }
+        },
+        "spoken": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "target_duration_seconds",
+            "speaking_rate_wpm_min",
+            "speaking_rate_wpm_max",
+            "interaction",
+            "editability",
+            "audiovisual_context",
+            "cueing_mode",
+            "interruption_likelihood",
+            "output_mode"
+          ],
+          "properties": {
+            "target_duration_seconds": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "speaking_rate_wpm_min": {
+              "type": "integer",
+              "minimum": 60,
+              "maximum": 240
+            },
+            "speaking_rate_wpm_max": {
+              "type": "integer",
+              "minimum": 60,
+              "maximum": 240
+            },
+            "interaction": {
+              "enum": [
+                "monologue",
+                "interview",
+                "conversation",
+                "q-and-a"
+              ]
+            },
+            "editability": {
+              "enum": [
+                "live",
+                "editable",
+                "fixed"
+              ]
+            },
+            "audiovisual_context": {
+              "type": "string",
+              "minLength": 1
+            },
+            "cueing_mode": {
+              "enum": [
+                "verbatim",
+                "talking-points",
+                "none"
+              ]
+            },
+            "interruption_likelihood": {
+              "enum": [
+                "low",
+                "moderate",
+                "high"
+              ]
+            },
+            "output_mode": {
+              "enum": [
+                "verbatim",
+                "talking-points"
+              ]
+            }
           }
         }
-      }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "context": {
+                "properties": {
+                  "medium": {
+                    "const": "spoken"
+                  }
+                },
+                "required": [
+                  "medium"
+                ],
+                "type": "object"
+              }
+            },
+            "required": [
+              "context"
+            ],
+            "type": "object"
+          },
+          "then": {
+            "required": [
+              "spoken"
+            ],
+            "type": "object",
+            "properties": {
+              "spoken": {}
+            }
+          }
+        }
+      ]
     },
     "response": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["kind", "draft", "applied_rules", "unresolved", "review_flags", "authorized_to_publish", "validation"],
+      "required": [
+        "kind",
+        "contract_version",
+        "outcome",
+        "draft",
+        "rendering_status",
+        "renderer_instructions",
+        "performance_notation",
+        "delivery_guidance",
+        "spoken_metadata",
+        "accepted_claims",
+        "applied_rules",
+        "resolved_context",
+        "conflicts",
+        "unresolved",
+        "refusal_reasons",
+        "review_flags",
+        "authorship_status",
+        "human_review_required",
+        "authorized_to_publish",
+        "validation"
+      ],
       "properties": {
-        "kind": { "const": "response" },
-        "draft": { "type": "string" },
-        "applied_rules": { "type": "array", "items": { "type": "string", "minLength": 1 } },
-        "unresolved": { "type": "array", "items": { "type": "string" } },
-        "review_flags": { "type": "array", "items": { "type": "string" } },
-        "authorized_to_publish": { "const": false },
-        "validation": {
-          "type": "object",
-          "additionalProperties": false,
-          "required": ["deterministic"],
-          "properties": {
-            "deterministic": {
+        "kind": {
+          "const": "response"
+        },
+        "contract_version": {
+          "const": "2.0.0"
+        },
+        "outcome": {
+          "enum": [
+            "draft",
+            "needs_input",
+            "refused"
+          ]
+        },
+        "draft": {
+          "type": "string"
+        },
+        "performance_notation": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "delivery_guidance": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "spoken_metadata": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
               "type": "object",
               "additionalProperties": false,
-              "required": ["passed", "failures"],
+              "required": [
+                "target_duration_seconds",
+                "speaking_rate_wpm_min",
+                "speaking_rate_wpm_max",
+                "interaction",
+                "editability",
+                "audiovisual_context",
+                "cueing_mode",
+                "interruption_likelihood",
+                "output_mode",
+                "estimated_duration_seconds"
+              ],
               "properties": {
-                "passed": { "type": "boolean" },
-                "failures": { "type": "array", "items": { "type": "object" } }
+                "target_duration_seconds": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "speaking_rate_wpm_min": {
+                  "type": "integer",
+                  "minimum": 60,
+                  "maximum": 240
+                },
+                "speaking_rate_wpm_max": {
+                  "type": "integer",
+                  "minimum": 60,
+                  "maximum": 240
+                },
+                "interaction": {
+                  "enum": [
+                    "monologue",
+                    "interview",
+                    "conversation",
+                    "q-and-a"
+                  ]
+                },
+                "editability": {
+                  "enum": [
+                    "live",
+                    "editable",
+                    "fixed"
+                  ]
+                },
+                "audiovisual_context": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "cueing_mode": {
+                  "enum": [
+                    "verbatim",
+                    "talking-points",
+                    "none"
+                  ]
+                },
+                "interruption_likelihood": {
+                  "enum": [
+                    "low",
+                    "moderate",
+                    "high"
+                  ]
+                },
+                "output_mode": {
+                  "enum": [
+                    "verbatim",
+                    "talking-points"
+                  ]
+                },
+                "estimated_duration_seconds": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              }
+            }
+          ]
+        },
+        "accepted_claims": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/fact"
+          }
+        },
+        "applied_rules": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "resolved_context": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "intent",
+            "medium",
+            "delivery",
+            "form",
+            "platform",
+            "relationship",
+            "stakes"
+          ],
+          "properties": {
+            "intent": {
+              "$ref": "#/$defs/resolved_intent"
+            },
+            "medium": {
+              "$ref": "#/$defs/resolved_medium"
+            },
+            "delivery": {
+              "$ref": "#/$defs/resolved_delivery"
+            },
+            "form": {
+              "$ref": "#/$defs/resolved_form"
+            },
+            "platform": {
+              "$ref": "#/$defs/resolved_platform"
+            },
+            "relationship": {
+              "$ref": "#/$defs/resolved_relationship"
+            },
+            "stakes": {
+              "$ref": "#/$defs/resolved_stakes"
+            }
+          }
+        },
+        "conflicts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/conflict"
+          }
+        },
+        "unresolved": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/unresolved"
+          }
+        },
+        "refusal_reasons": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "review_flags": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "authorship_status": {
+          "const": "unverified-draft"
+        },
+        "human_review_required": {
+          "const": true
+        },
+        "authorized_to_publish": {
+          "const": false
+        },
+        "validation": {
+          "$ref": "#/$defs/validation"
+        },
+        "rendering_status": {
+          "const": "agent-renderer-required"
+        },
+        "renderer_instructions": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "outcome": {
+                "const": "draft"
               }
             },
-            "model_graded": { "enum": ["not-run", "passed", "failed"] }
+            "required": [
+              "outcome"
+            ],
+            "type": "object"
+          },
+          "then": {
+            "properties": {
+              "draft": {
+                "type": "string",
+                "minLength": 1
+              },
+              "unresolved": {
+                "maxItems": 0,
+                "type": "array"
+              },
+              "refusal_reasons": {
+                "maxItems": 0,
+                "type": "array"
+              }
+            },
+            "type": "object"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "outcome": {
+                "const": "needs_input"
+              }
+            },
+            "required": [
+              "outcome"
+            ],
+            "type": "object"
+          },
+          "then": {
+            "properties": {
+              "draft": {
+                "const": ""
+              },
+              "unresolved": {
+                "minItems": 1,
+                "type": "array"
+              },
+              "refusal_reasons": {
+                "maxItems": 0,
+                "type": "array"
+              }
+            },
+            "type": "object"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "outcome": {
+                "const": "refused"
+              }
+            },
+            "required": [
+              "outcome"
+            ],
+            "type": "object"
+          },
+          "then": {
+            "properties": {
+              "draft": {
+                "const": ""
+              },
+              "refusal_reasons": {
+                "minItems": 1,
+                "type": "array"
+              }
+            },
+            "type": "object"
+          }
+        },
+        {
+          "if": {
+            "type": "object",
+            "properties": {
+              "outcome": {
+                "const": "draft"
+              }
+            },
+            "required": [
+              "outcome"
+            ]
+          },
+          "then": {
+            "type": "object",
+            "properties": {
+              "validation": {
+                "type": "object",
+                "properties": {
+                  "deterministic": {
+                    "type": "object",
+                    "properties": {
+                      "passed": {
+                        "const": true
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "type": "object",
+            "properties": {
+              "outcome": {
+                "enum": [
+                  "needs_input",
+                  "refused"
+                ]
+              }
+            },
+            "required": [
+              "outcome"
+            ]
+          },
+          "then": {
+            "type": "object",
+            "properties": {
+              "validation": {
+                "type": "object",
+                "properties": {
+                  "deterministic": {
+                    "type": "object",
+                    "properties": {
+                      "passed": {
+                        "const": false
+                      },
+                      "failures": {
+                        "type": "array",
+                        "minItems": 1
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "fact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "text",
+        "input_origin",
+        "verification_status",
+        "claim_type",
+        "attribution_permission",
+        "confidence"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "input_origin": {
+          "enum": [
+            "user-provided",
+            "public-source",
+            "verified-record",
+            "synthetic"
+          ]
+        },
+        "verification_status": {
+          "enum": [
+            "verified",
+            "unverified",
+            "disputed"
+          ]
+        },
+        "claim_type": {
+          "enum": [
+            "observable-fact",
+            "inference",
+            "opinion",
+            "experience",
+            "emotion",
+            "apology",
+            "commitment",
+            "approval",
+            "third-party-attribution"
+          ]
+        },
+        "attribution_permission": {
+          "enum": [
+            "not-applicable",
+            "explicitly-permitted",
+            "not-permitted",
+            "unknown"
+          ]
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "claim_type": {
+                "enum": [
+                  "experience",
+                  "emotion",
+                  "apology",
+                  "commitment",
+                  "approval"
+                ]
+              }
+            },
+            "required": [
+              "claim_type"
+            ],
+            "type": "object"
+          },
+          "then": {
+            "properties": {
+              "input_origin": {
+                "enum": [
+                  "user-provided",
+                  "verified-record",
+                  "synthetic"
+                ]
+              }
+            },
+            "type": "object"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "claim_type": {
+                "const": "third-party-attribution"
+              }
+            },
+            "required": [
+              "claim_type"
+            ],
+            "type": "object"
+          },
+          "then": {
+            "properties": {
+              "input_origin": {
+                "enum": [
+                  "public-source",
+                  "verified-record"
+                ]
+              },
+              "attribution_permission": {
+                "enum": [
+                  "explicitly-permitted",
+                  "unknown",
+                  "not-permitted"
+                ]
+              }
+            },
+            "type": "object"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "attribution_permission": {
+                "const": "not-applicable"
+              }
+            },
+            "required": [
+              "attribution_permission"
+            ],
+            "type": "object"
+          },
+          "then": {
+            "properties": {
+              "claim_type": {
+                "enum": [
+                  "observable-fact",
+                  "inference"
+                ]
+              }
+            },
+            "type": "object"
+          }
+        }
+      ]
+    },
+    "conflict": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "dimensions",
+        "winner",
+        "loser",
+        "resolution",
+        "severity"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "dimensions": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "winner": {
+          "type": "string",
+          "minLength": 1
+        },
+        "loser": {
+          "type": "string",
+          "minLength": 1
+        },
+        "resolution": {
+          "type": "string",
+          "minLength": 1
+        },
+        "severity": {
+          "enum": [
+            "warning",
+            "needs-input",
+            "refusal"
+          ]
+        }
+      }
+    },
+    "unresolved": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "classification",
+        "message"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "classification": {
+          "enum": [
+            "optional",
+            "draft-blocking",
+            "safety-blocking"
+          ]
+        },
+        "message": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "validation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "deterministic",
+        "response_lint"
+      ],
+      "properties": {
+        "deterministic": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "passed",
+            "failures"
+          ],
+          "properties": {
+            "passed": {
+              "type": "boolean"
+            },
+            "failures": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "id"
+                ],
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              }
+            }
+          }
+        },
+        "response_lint": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "passed",
+            "failures"
+          ],
+          "properties": {
+            "passed": {
+              "type": "boolean"
+            },
+            "failures": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "id"
+                ],
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              }
+            }
           }
         }
       }
+    },
+    "resolved_intent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "value",
+        "provenance"
+      ],
+      "properties": {
+        "value": {
+          "enum": [
+            "inform",
+            "recommend",
+            "request",
+            "decide",
+            "explain",
+            "update",
+            "disagree",
+            "apologize",
+            "invite",
+            "reflect"
+          ]
+        },
+        "provenance": {
+          "type": "string",
+          "enum": [
+            "user-specified",
+            "inferred",
+            "defaulted",
+            "preset"
+          ]
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "rule_id": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "provenance": {
+                "const": "inferred"
+              }
+            },
+            "required": [
+              "provenance"
+            ],
+            "type": "object"
+          },
+          "then": {
+            "required": [
+              "confidence",
+              "rule_id"
+            ],
+            "type": "object",
+            "properties": {
+              "confidence": {},
+              "rule_id": {}
+            }
+          },
+          "else": {
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "confidence"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "confidence": {}
+                  }
+                },
+                {
+                  "required": [
+                    "rule_id"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "rule_id": {}
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "resolved_medium": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "value",
+        "provenance"
+      ],
+      "properties": {
+        "value": {
+          "enum": [
+            "written",
+            "spoken"
+          ]
+        },
+        "provenance": {
+          "type": "string",
+          "enum": [
+            "user-specified",
+            "inferred",
+            "defaulted",
+            "preset"
+          ]
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "rule_id": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "provenance": {
+                "const": "inferred"
+              }
+            },
+            "required": [
+              "provenance"
+            ],
+            "type": "object"
+          },
+          "then": {
+            "required": [
+              "confidence",
+              "rule_id"
+            ],
+            "type": "object",
+            "properties": {
+              "confidence": {},
+              "rule_id": {}
+            }
+          },
+          "else": {
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "confidence"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "confidence": {}
+                  }
+                },
+                {
+                  "required": [
+                    "rule_id"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "rule_id": {}
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "resolved_delivery": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "value",
+        "provenance"
+      ],
+      "properties": {
+        "value": {
+          "enum": [
+            "live",
+            "recorded",
+            "asynchronous"
+          ]
+        },
+        "provenance": {
+          "type": "string",
+          "enum": [
+            "user-specified",
+            "inferred",
+            "defaulted",
+            "preset"
+          ]
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "rule_id": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "provenance": {
+                "const": "inferred"
+              }
+            },
+            "required": [
+              "provenance"
+            ],
+            "type": "object"
+          },
+          "then": {
+            "required": [
+              "confidence",
+              "rule_id"
+            ],
+            "type": "object",
+            "properties": {
+              "confidence": {},
+              "rule_id": {}
+            }
+          },
+          "else": {
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "confidence"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "confidence": {}
+                  }
+                },
+                {
+                  "required": [
+                    "rule_id"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "rule_id": {}
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "resolved_form": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "value",
+        "provenance"
+      ],
+      "properties": {
+        "value": {
+          "enum": [
+            "post",
+            "thread",
+            "email",
+            "message",
+            "script",
+            "talking-points",
+            "interview-answer",
+            "presentation",
+            "caption",
+            "article"
+          ]
+        },
+        "provenance": {
+          "type": "string",
+          "enum": [
+            "user-specified",
+            "inferred",
+            "defaulted",
+            "preset"
+          ]
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "rule_id": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "provenance": {
+                "const": "inferred"
+              }
+            },
+            "required": [
+              "provenance"
+            ],
+            "type": "object"
+          },
+          "then": {
+            "required": [
+              "confidence",
+              "rule_id"
+            ],
+            "type": "object",
+            "properties": {
+              "confidence": {},
+              "rule_id": {}
+            }
+          },
+          "else": {
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "confidence"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "confidence": {}
+                  }
+                },
+                {
+                  "required": [
+                    "rule_id"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "rule_id": {}
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "resolved_platform": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "value",
+        "provenance"
+      ],
+      "properties": {
+        "value": {
+          "enum": [
+            "none",
+            "x",
+            "linkedin",
+            "instagram",
+            "email",
+            "chat",
+            "podcast",
+            "stage"
+          ]
+        },
+        "provenance": {
+          "type": "string",
+          "enum": [
+            "user-specified",
+            "inferred",
+            "defaulted",
+            "preset"
+          ]
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "rule_id": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "provenance": {
+                "const": "inferred"
+              }
+            },
+            "required": [
+              "provenance"
+            ],
+            "type": "object"
+          },
+          "then": {
+            "required": [
+              "confidence",
+              "rule_id"
+            ],
+            "type": "object",
+            "properties": {
+              "confidence": {},
+              "rule_id": {}
+            }
+          },
+          "else": {
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "confidence"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "confidence": {}
+                  }
+                },
+                {
+                  "required": [
+                    "rule_id"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "rule_id": {}
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "resolved_relationship": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "value",
+        "provenance"
+      ],
+      "properties": {
+        "value": {
+          "enum": [
+            "unknown",
+            "collaborator",
+            "peer",
+            "customer",
+            "leader",
+            "direct-report",
+            "new-contact",
+            "public"
+          ]
+        },
+        "provenance": {
+          "type": "string",
+          "enum": [
+            "user-specified",
+            "inferred",
+            "defaulted",
+            "preset"
+          ]
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "rule_id": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "provenance": {
+                "const": "inferred"
+              }
+            },
+            "required": [
+              "provenance"
+            ],
+            "type": "object"
+          },
+          "then": {
+            "required": [
+              "confidence",
+              "rule_id"
+            ],
+            "type": "object",
+            "properties": {
+              "confidence": {},
+              "rule_id": {}
+            }
+          },
+          "else": {
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "confidence"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "confidence": {}
+                  }
+                },
+                {
+                  "required": [
+                    "rule_id"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "rule_id": {}
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "resolved_stakes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "value",
+        "provenance"
+      ],
+      "properties": {
+        "value": {
+          "enum": [
+            "low",
+            "moderate",
+            "high",
+            "critical"
+          ]
+        },
+        "provenance": {
+          "type": "string",
+          "enum": [
+            "user-specified",
+            "inferred",
+            "defaulted",
+            "preset"
+          ]
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "rule_id": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "provenance": {
+                "const": "inferred"
+              }
+            },
+            "required": [
+              "provenance"
+            ],
+            "type": "object"
+          },
+          "then": {
+            "required": [
+              "confidence",
+              "rule_id"
+            ],
+            "type": "object",
+            "properties": {
+              "confidence": {},
+              "rule_id": {}
+            }
+          },
+          "else": {
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "confidence"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "confidence": {}
+                  }
+                },
+                {
+                  "required": [
+                    "rule_id"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "rule_id": {}
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ]
     }
   }
 }
