@@ -78,3 +78,10 @@ test('llms-full embeds schema-valid response and conflict examples plus renderer
   assert.match(text,/permitted transformations/i);
   assert.match(text,/closed-world/i);
 });
+
+test('specimens render canonical claim text rather than object coercion', async () => {
+  const html = await readFile(new URL('dist/specimens/index.html', root), 'utf8');
+  assert.doesNotMatch(html, /\[object Object\]/);
+  assert.match(html, /Canonical source/);
+  assert.match(html, /synthetic/i);
+});
