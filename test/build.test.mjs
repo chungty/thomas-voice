@@ -47,3 +47,14 @@ test('public artifact tree contains no source maps, dotfiles, or non-allowlisted
     assert.doesNotMatch(file.pathname, /\.map$/);
   }
 });
+
+test('release notes surface is published to people and to agents', async () => {
+  const surfacesPage = await readFile(new URL('dist/surfaces/index.html', root), 'utf8');
+  const specimensPage = await readFile(new URL('dist/specimens/index.html', root), 'utf8');
+  const machine = JSON.parse(await readFile(new URL('dist/machine/voice-system.json', root), 'utf8'));
+  const schema = JSON.parse(await readFile(new URL('dist/machine/schema.json', root), 'utf8'));
+  assert.match(surfacesPage, /<h3>Release notes<\/h3>/);
+  assert.match(specimensPage, /<p class="kicker">Release notes<\/p>/);
+  assert.ok(machine.surfaces.some((surface) => surface.id === 'release-notes'));
+  assert.ok(schema.$defs.request.properties.surface.enum.includes('release-notes'));
+});

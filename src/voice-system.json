@@ -1,9 +1,9 @@
 {
   "id": "thomas-public-voice",
   "name": "Thomas Voice",
-  "contract_version": "1.0.0",
-  "content_version": "0.1.0",
-  "updated": "2026-09-23",
+  "contract_version": "1.1.0",
+  "content_version": "0.2.0",
+  "updated": "2026-10-03",
   "summary": "A public drafting system for clear, exact, human communication across surfaces.",
   "precedence": [
     "truth_privacy_safety_authorization",
@@ -656,6 +656,50 @@
       ]
     },
     {
+      "id": "release-notes",
+      "name": "Release notes",
+      "job": "Tell a product's users what they can now do or see, one period at a time.",
+      "defaults": {
+        "length": "up to 3 New items, at most 5 Improved and at most 5 Fixed lines per period",
+        "case": "standard",
+        "formatting": "period heading, newest period first; each New item is a 2–6 word title and one sentence of at most 20 words; Improved and Fixed are bullets of at most 12 words each; one link per item to where the change lives",
+        "opening": "the period heading, then the New items",
+        "ending": "the last Fixed line; no sign-off or summary"
+      },
+      "required": [
+        "write for the product's users: what they can now do or see",
+        "second person, present tense, active voice",
+        "the product's own words for its features",
+        "New, Improved and Fixed kept apart; Fixed says how it works now",
+        "true when shipped and still true",
+        "merge changes about one outcome into one item"
+      ],
+      "avoid": [
+        "internal names users never see: agents, tools, models, people, branches, PR or issue numbers",
+        "process: how it was built, tests, refactors, CI, deploys",
+        "internal work with no visible change, and changes reverted in the same period",
+        "hype words, exclamation marks and em dashes",
+        "an entry for a period with nothing users can see",
+        "\"bug fixes and improvements\" or \"we added\""
+      ],
+      "recipe": {
+        "directness": 5,
+        "structure": 5,
+        "warmth": 2,
+        "evidence": 4,
+        "polish": 4
+      },
+      "review_when": [
+        "price, limit or plan change",
+        "data or privacy change",
+        "removed feature",
+        "security fix"
+      ],
+      "test_ids": [
+        "surface.release-notes"
+      ]
+    },
+    {
       "id": "neutral-public",
       "name": "Neutral public fallback",
       "job": "Produce a safe, plain draft when the destination is unknown.",
@@ -1048,6 +1092,56 @@
         "approval_status": "approved-for-public-v1",
         "last_reviewed": "2026-09-23"
       }
+    },
+    {
+      "id": "spec.release.positive",
+      "surface": "release-notes",
+      "polarity": "positive",
+      "input": "Write one week of release notes for a task-planning app from that week's merged changes.",
+      "text": "Week of September 28, 2026\n\n[Shared lists](/lists)\nInvite anyone to a list and see their changes as they make them.\n\n[Calendar view](/calendar)\nSee every task that has a due date on one monthly calendar.\n\nImproved\n- [Search](/search) finds tasks by their notes as well as their titles.\n- [Reminders](/settings/reminders) arrive at the time you set, in your time zone.\n- [Long lists](/lists) open faster.\n\nFixed\n- [Completed tasks](/tasks) stay completed after you sync a second device.\n- [Exported files](/export) show the same dates as the app.",
+      "annotation": "Each New item names something a user can now do. Improved and Fixed lines say how it works now. Nothing says how it was built or who built it.",
+      "generalize": [
+        "lead each item with what the user can now do",
+        "say how it works now, not what broke",
+        "one link per item to where the change lives",
+        "leave out how it was built"
+      ],
+      "do_not_copy": [
+        "product features",
+        "link paths",
+        "dates"
+      ],
+      "public_safe": true,
+      "provenance": {
+        "source_class": "synthetic",
+        "approval_status": "approved-for-public-v1",
+        "last_reviewed": "2026-10-03"
+      }
+    },
+    {
+      "id": "spec.release.near-miss",
+      "surface": "release-notes",
+      "polarity": "negative",
+      "input": "Write one week of release notes for a task-planning app from that week's merged changes.",
+      "text": "Release v2.4.1\n\nWe're thrilled to announce powerful new collaboration features! Thanks to Dana's sync engine refactor (#482), lists are now seamlessly shared — and the new model makes search smarter.\n\nBug fixes and improvements.",
+      "annotation": "It reports the work instead of the outcome: a version label, a builder's name, an issue number, the model behind a feature, hype, and a catch-all line that tells users nothing.",
+      "generalize": [
+        "name the outcome, not the work",
+        "no builders, tools, models or issue numbers",
+        "no hype or catch-all lines"
+      ],
+      "do_not_copy": [
+        "version label",
+        "contributor name",
+        "issue number",
+        "celebration framing"
+      ],
+      "public_safe": true,
+      "provenance": {
+        "source_class": "synthetic",
+        "approval_status": "approved-for-public-v1",
+        "last_reviewed": "2026-10-03"
+      }
     }
   ],
   "tests": [
@@ -1218,6 +1312,12 @@
       "type": "deterministic",
       "severity": "error",
       "assertion": "The handoff names artifacts, verification, remaining work, and human action."
+    },
+    {
+      "id": "surface.release-notes",
+      "type": "deterministic",
+      "severity": "error",
+      "assertion": "Release notes keep the period shape and its limits, tell users what they can now do, and name no internal work, people, tools, or PR or issue numbers."
     },
     {
       "id": "surface.neutral-public",

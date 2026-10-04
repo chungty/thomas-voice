@@ -24,7 +24,7 @@
       "required": ["kind", "surface", "intent", "audience", "authorship", "content"],
       "properties": {
         "kind": { "const": "request" },
-        "surface": { "enum": ["quick-chat", "professional-outreach", "email", "team-update", "public-post", "long-form", "sensitive-note", "agent-handoff", "neutral-public"] },
+        "surface": { "enum": ["quick-chat", "professional-outreach", "email", "team-update", "public-post", "long-form", "sensitive-note", "agent-handoff", "release-notes", "neutral-public"] },
         "intent": { "type": "string", "minLength": 1 },
         "audience": {
           "type": "object",
