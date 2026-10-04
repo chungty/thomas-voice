@@ -21,6 +21,7 @@ test('published JSON schema compiles and validates request and response envelope
     constraints: { sensitivity: 'public' }
   };
   assert.equal(validate(request), true, JSON.stringify(validate.errors));
+  assert.equal(validate({ ...request, surface: 'release-notes', intent: 'report' }), true, JSON.stringify(validate.errors));
 
   const response = {
     kind: 'response', draft: 'The build passed.', applied_rules: ['foundation.job-first'],
